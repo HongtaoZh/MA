@@ -1,3 +1,46 @@
+# TransitiveCEP
+Transitive CEP is a research based project based on AdaptiveCEP, the project provides the transitions support in CEP strategies as per cahgne in envronmental conditions and the chagne in user demands
+
+##Running Docker simulation
+### Mac users:
+* Run docker in the background
+* Install PUMBA :https://github.com/gaia-adm/pumba
+* Make sure that docker has atleast 6 GB RAM (Simulation wont work if RAM is insufficient)
+* Install NPM and ttab
+* Run publish_docker.sh shell script. The script will create containers and open the container in new tabs
+* run tail -f adaptiveCEP.log to see the logs
+* wait for simulation to end and copy pietuzuch.csv and starks.csv files and generate graphs
+
+### Ubuntu users:
+* Run docker in the background
+* Make sure that docker has atleast 6 GB RAM (Simulation wont work if RAM is insufficient)
+* Run publish_docker.sh script
+* the script will generate the names of the containers
+* use docker exec -it <name> bash to open the docker containers
+* run tail -f command to the live logs 
+
+
+##Running Local simulation
+### Mac users:
+* Run local_tcep_simulation.sh script
+### Ubuntu users:
+* Run sbt one-jar command to generate the jar of the project
+* Run the following commands in new tabs
+```
+ java -Dconfig.resource=/simulation.conf -Done-jar.main.class=adaptivecep.machinenodes.VivaldiApp -jar ./target/scala-2.12/adaptivecep_2.12-0.0.1-SNAPSHOT-one-jar.jar --ip 127.0.0.1 --port 2549
+ java -Dconfig.resource=/simulation.conf -Done-jar.main.class=adaptivecep.machinenodes.BenchmarkingApp -jar ./target/scala-2.12/adaptivecep_2.12-0.0.1-SNAPSHOT-one-jar.jar --ip 127.0.0.1 --port 2550
+ java -Dconfig.resource=/simulation.conf -Done-jar.main.class=adaptivecep.machinenodes.EmptyApp -jar ./target/scala-2.12/adaptivecep_2.12-0.0.1-SNAPSHOT-one-jar.jar --ip 127.0.0.1 --port 2557
+ java -Dconfig.resource=/simulation.conf -Done-jar.main.class=adaptivecep.machinenodes.EmptyApp -jar ./target/scala-2.12/adaptivecep_2.12-0.0.1-SNAPSHOT-one-jar.jar --ip 127.0.0.1 --port 2558
+ java -Dconfig.resource=/simulation.conf -Done-jar.main.class=adaptivecep.machinenodes.EmptyApp -jar ./target/scala-2.12/adaptivecep_2.12-0.0.1-SNAPSHOT-one-jar.jar --ip 127.0.0.1 --port 2559
+ java -Dconfig.resource=/simulation.conf -Done-jar.main.class=adaptivecep.machinenodes.EmptyApp -jar ./target/scala-2.12/adaptivecep_2.12-0.0.1-SNAPSHOT-one-jar.jar --ip 127.0.0.1 --port 2560
+ java -Dconfig.resource=/simulation.conf -Done-jar.main.class=adaptivecep.machinenodes.EmptyApp -jar ./target/scala-2.12/adaptivecep_2.12-0.0.1-SNAPSHOT-one-jar.jar --ip 127.0.0.1 --port 2562
+ java -Dconfig.resource=/simulation.conf -Done-jar.main.class=adaptivecep.machinenodes.PublisherApp -jar ./target/scala-2.12/adaptivecep_2.12-0.0.1-SNAPSHOT-one-jar.jar --ip 127.0.0.1 --port 2551 --name A
+ java -Dconfig.resource=/simulation.conf -Done-jar.main.class=adaptivecep.machinenodes.PublisherApp -jar ./target/scala-2.12/adaptivecep_2.12-0.0.1-SNAPSHOT-one-jar.jar --ip 127.0.0.1 --port 2552 --name B
+ java -Dconfig.resource=/simulation.conf -Done-jar.main.class=adaptivecep.machinenodes.PublisherApp -jar ./target/scala-2.12/adaptivecep_2.12-0.0.1-SNAPSHOT-one-jar.jar --ip 127.0.0.1 --port 2553 --name C
+ java -Dconfig.resource=/simulation.conf -Done-jar.main.class=adaptivecep.simulation.trasitivecep.SimulationRunner -jar ./target/scala-2.12/adaptivecep_2.12-0.0.1-SNAPSHOT-one-jar.jar .
+
+``` 
+
 # AdaptiveCEP
 
 AdaptiveCEP is a research project exploring ways to embed quality demands into queries for event processing systems. As such, its main contributions are:
