@@ -1,0 +1,37 @@
+I couldn't open file name `tudkom.tex.aux'
+I couldn't open file name `tudkom.tex.aux'
+I couldn't open file name `tudkom.tex.aux'
+I couldn't open file name `tudkom.tex.aux'
+I couldn't open file name `tudkom.tex.aux'
+I couldn't open file name `tudkom.tex.aux'
+I couldn't open file name `tudkom.tex.aux'
+This is BibTeX, Version 0.99d (TeX Live 2016/Debian)
+The top-level auxiliary file: tudkom.aux
+The style file: plainnat.bst
+Database file #1: library.bib
+Warning--empty journal in Siegmund
+Warning--empty year in Siegmund
+Warning--empty year in Siegmund
+(There were 3 warnings)
+This is BibTeX, Version 0.99d (TeX Live 2016/Debian)
+The top-level auxiliary file: tudkom.aux
+The style file: plainnat.bst
+Database file #1: library.bib
+This is BibTeX, Version 0.99d (TeX Live 2016/Debian)
+The top-level auxiliary file: tudkom.aux
+The style file: plainnat.bst
+Database file #1: library.bib
+Warning--I didn't find a database entry for ""
+(There was 1 warning)
+This is BibTeX, Version 0.99d (TeX Live 2016/Debian)
+The top-level auxiliary file: tudkom.aux
+The style file: plainnat.bst
+Database file #1: library.bib
+Warning--I didn't find a database entry for ""
+(There was 1 warning)
+This is BibTeX, Version 0.99d (TeX Live 2016/Debian)
+The top-level auxiliary file: tudkom.aux
+The style file: plainnat.bst
+Database file #1: library.bib
+Warning--I didn't find a database entry for ""
+(There was 1 warning)
