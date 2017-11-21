@@ -35,3 +35,11 @@ The style file: plainnat.bst
 Database file #1: library.bib
 Warning--I didn't find a database entry for ""
 (There was 1 warning)
+This is BibTeX, Version 0.99d (TeX Live 2016/Debian)
+The top-level auxiliary file: tudkom.aux
+The style file: plainnat.bst
+Database file #1: library.bib
+This is BibTeX, Version 0.99d (TeX Live 2016/Debian)
+The top-level auxiliary file: tudkom.aux
+The style file: plainnat.bst
+Database file #1: library.bib
