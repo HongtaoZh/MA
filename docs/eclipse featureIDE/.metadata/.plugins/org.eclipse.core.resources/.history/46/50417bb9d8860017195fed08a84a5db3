@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<featuremodel:FeatureModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:featuremodel="http://www.eclipse.org/featuremodel" id="_yULpgYbOEeen6dWGwipyeg">
+  <root id="_3CP7IIbOEeen6dWGwipyeg" name="Context">
+    <children id="_FNpp4IbPEeen6dWGwipyeg">
+      <features id="_FNmmkIbPEeen6dWGwipyeg"/>
+    </children>
+    <children id="_F6eToIbPEeen6dWGwipyeg">
+      <features id="_F6b3YIbPEeen6dWGwipyeg"/>
+    </children>
+    <children id="_GapogIbPEeen6dWGwipyeg">
+      <features id="_GanMQIbPEeen6dWGwipyeg">
+        <children id="_X7Tb0IbPEeen6dWGwipyeg" lower="1">
+          <features id="_X7QYgIbPEeen6dWGwipyeg"/>
+        </children>
+        <children id="_YobAgIbPEeen6dWGwipyeg">
+          <features id="_YoX9MIbPEeen6dWGwipyeg"/>
+        </children>
+      </features>
+    </children>
+  </root>
+</featuremodel:FeatureModel>

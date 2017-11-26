@@ -1,0 +1,51 @@
+Topic (German) : Spezifikation von Transitionen in Complex Event Processing Systems mit Hilfe von Context Feature Models
+Topic (English): Specification of Transitions in Complex Event Processing Systems using Context Feature Models
+
+Goals:
+
+
+Inhalt: 
+- Identify properties of CFM required to represent an adaptive CEP system
+- apply machine learning methods to solve the problem of context prediction in adaptive CEP system
+
+Vorgehen: 
+- Literature review on CFM in DSPLs and review of existing Adaptive CEP systems
+- Analysis of adaptive CEP system to express the dynamics using CFM in DSPLs
+- Implementation and evalutation of the model on existing adaptive CEP system
+
+Herausforderungen:
+- Capture dynamicity in the context features and quality demands of Adaptive CEP system using CFM
+- application of machine learning methods for the state prediction problem in CEP
+
+Zielvorgaben:
+1. Literature review and analysis of CFM in DSPLs and adaptive CEP systems
+2. Identify properties of CFMs required to represent an adaptive CEP system
+3. Propose a concept of the CFM model for AdaptiveCEP that models contextual changes along with non-functional quality requirements to specify possible valid configurations of mechanisms for transitions
+4. Design of the ML approach that automatically identifies CEP mechanisms with respect to valid context and non-functional quality requirements
+5. Prototypical implementation of the designed concept over the existing AdaptiveCEP system
+6. Evaluate the designed solution and compare it
+
+========================================================================
+OLD
+1. Literature review and analysis of context feature models in dynamic software product lines and adaptive CEP systems. Document it (4 weeks)
+
+2. Identify properties of Context Feature Models required to represent an adaptive complex event processing system. Document it. (2 weeks)
+
+3. Design of the CFM model for AdaptiveCEP. Document it. (3 weeks)
+
+4. Design of the machine learning approach to predict impact of the quality demands on the configuration types (environmental conditions) for placement in CEP. Document it. (3 weeks)
+(interpreted meaning: find a fitting ML approach to 
+	- predict the impact of QoS demands (from queries) on ???
+(my understanding: ML approach to...
+	a) predict the performance of every placement algorithm that can satisfy all constraints imposed by the model for a given context, then select the best one 
+	b) train a classifier to select a placement algorithm that maximises performance for a given context
+)
+
+5. Prototypical implementation of the designed architecture over the existing AdaptiveCEP system. Document it. (4 weeks)
+
+6. Evaluate the designed solution and compare it. Document it. (4 weeks)
+
+7. Finishing thesis writing (4 weeks)
+
+=========================================================================
+

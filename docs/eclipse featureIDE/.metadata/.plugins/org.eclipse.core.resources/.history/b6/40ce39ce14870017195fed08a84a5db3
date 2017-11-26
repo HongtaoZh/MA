@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<featuremodel:FeatureModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:featuremodel="http://www.eclipse.org/featuremodel" id="_yULpgYbOEeen6dWGwipyeg">
+  <root id="_3CP7IIbOEeen6dWGwipyeg" name="System">
+    <children id="_uolaIIbREeen6dWGwipyeg" lower="1">
+      <features id="_uokMAIbREeen6dWGwipyeg" name="Query">
+        <children id="_HYS1IIbSEeen6dWGwipyeg" lower="1">
+          <features id="_bHzXkIbQEeen6dWGwipyeg" name="Situation">
+            <children id="_IHU60IbREeen6dWGwipyeg" lower="0">
+              <features id="_IHSekIbREeen6dWGwipyeg" name="Bandwidth">
+                <children id="_YR72UIbTEeen6dWGwipyeg" lower="1" upper="1">
+                  <features id="_YR6oMIbTEeen6dWGwipyeg" name="high"/>
+                  <features id="_Y7XN0IbTEeen6dWGwipyeg" name="low"/>
+                </children>
+              </features>
+              <features id="_JFa6wIbREeen6dWGwipyeg" name="Latency">
+                <children id="_i6w2MIbTEeen6dWGwipyeg" lower="1" upper="1">
+                  <features id="_i6vBAIbTEeen6dWGwipyeg" name="high"/>
+                  <features id="_jePWsIbTEeen6dWGwipyeg" name="low"/>
+                </children>
+              </features>
+              <features id="_6GxAwIbpEeen6dWGwipyeg" name="Availability">
+                <children id="_ATXF4IbqEeen6dWGwipyeg" lower="1" upper="1">
+                  <features id="_ATV3wIbqEeen6dWGwipyeg" name="low"/>
+                  <features id="_BaGrgIbqEeen6dWGwipyeg" name="high"/>
+                </children>
+              </features>
+              <features id="_APzXYIbxEeen6dWGwipyeg" name="..."/>
+            </children>
+            <children id="_4AqP4IbpEeen6dWGwipyeg">
+              <features id="_4ApBwIbpEeen6dWGwipyeg"/>
+            </children>
+          </features>
+        </children>
+        <children id="_JQRN8IbTEeen6dWGwipyeg" lower="1">
+          <features id="_JQPYwIbTEeen6dWGwipyeg" name="Operator">
+            <children id="_HG8hQIbkEeen6dWGwipyeg">
+              <features id="_R0OkUIbZEeen6dWGwipyeg" name="QoS demand"/>
+            </children>
+          </features>
+        </children>
+      </features>
+    </children>
+    <children id="_EHzTwIbdEeen6dWGwipyeg" lower="1">
+      <features id="_EHyFoIbdEeen6dWGwipyeg" name="Host">
+        <children id="_L5ijAIbjEeen6dWGwipyeg">
+          <features id="_L5hU4IbjEeen6dWGwipyeg" name="Neighbour"/>
+        </children>
+        <children id="_Pdys4IbjEeen6dWGwipyeg" lower="1">
+          <features id="_PdxewIbjEeen6dWGwipyeg" name="QoS metric">
+            <children id="_wpib4IbqEeen6dWGwipyeg" lower="0">
+              <features id="_wphNwIbqEeen6dWGwipyeg" name="Utilization"/>
+              <features id="_xhAPYIbqEeen6dWGwipyeg" name="Bandwidth"/>
+              <features id="_yT4d0IbqEeen6dWGwipyeg" name="..."/>
+            </children>
+          </features>
+        </children>
+      </features>
+    </children>
+    <children id="_V4itUIbkEeen6dWGwipyeg" lower="1" upper="1">
+      <features id="_gmCmQIbuEeen6dWGwipyeg" name="Strategy A">
+        <children id="_nOJisIbuEeen6dWGwipyeg" lower="1">
+          <features id="_nOI7oIbuEeen6dWGwipyeg" name="optim. bandwidth"/>
+        </children>
+      </features>
+      <features id="_jzojoIbuEeen6dWGwipyeg" name="Strategy B">
+        <children id="_ySQwYIbuEeen6dWGwipyeg" lower="1">
+          <features id="_ySPiQIbuEeen6dWGwipyeg" name="optim. latency"/>
+        </children>
+      </features>
+    </children>
+  </root>
+</featuremodel:FeatureModel>

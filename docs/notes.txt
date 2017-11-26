@@ -1,0 +1,569 @@
+
+ what is cep and its operators?
+(freudenreich)
+- extract meaning from simple events;
+- basic ops:- aggregation (sum,avg,max,min,median,count in a certain time window)
+			- composition (combine (possibly heterogenous) events according to a pattern)
+			- derivation (use external knowledge and combine it with existing events to represent specific domain semantics) -> create higher-level events
+
+- event-condition-action rules: "event"(necessary trigger events) - condition (constraints for valid trigger patterns) - action (emission of a complex event)
+- operators for describing event patterns: (HiPAC) disjunction (v), sequence(;), closure(*)	-> zero or more occurences of an event E1*;E2 with E2 as termination event
+			-> all other operators can be expressed with these
+			-> with the exception of NOT(E;[t1,t2]) (event did not occur between t1 and t2)
+- event enrichment: add external information to an existing event	
+	
+=================================================================================================================================================	
+- what is context in event-based systems?
+(freudenreich)
+- varying definitions, user/app environment or situation
+- constructed from different pieces of information, subject to change
+- context information: 
+	-> interpretation context: about event notification (about the data) (-> semantics, interpretation of event e.g. measure system used) 
+		context models for this can be structured flat or hierarchical, can be represented in xml, must respect types (of elements), must define/state value semantics
+	-> situation context: about event itself (-> not carried by event itself but still relevant for situation, e.g. position event -> which room) 
+	- necessary because of decoupling and anonymity -> varying data semantics, types and structures between producers and consumers possible if not explicitly defined
+- situation context elements:
+	- general: user, environment, platform, service information, relations between users/services/activities, time
+	- concrete ex.: location, network status, movement, role, capabilities
+
+(Dey)
+- any information that can be used to characterize the situation of an entity. An entity is a person, place, or object that is considered relevant to the interaction between a user and an application, including the user and application.
+
+(Etzion et al.)
+- "Context is indirectly relevant information that is useful to functioning of the service, but not provided to the service as part of its invocation"
+
+===============================================================================================================================================	
+ what are qos metrics in ebs?
+(iot masterthesis)
+for iot:- app-related:
+			(reliability, coverage, lifetime, security, delay tolerance, availability, interactivity, mission-criticality, ent-to-end, directionality)
+		- network-related:
+			(latency, throughput, packet delivery ratio, jitter, fault tolerance, scalability, hop-count, signal strength, self-organization)
+		- node-related:
+			(energy consumption, accuracy, sampling rate, processing power, node density, time sync, heterogeneity, mobility)
+
+(frischbier)
+- alternatives (number of different available data sources)
+- availability (uptime of service/system)
+- bandwidth (communication link capacity -> traffic per time )
+- completeness (of information for the subscriber: 1. of individual msg parts -> attributes 2. of sequence of multiple msgs)
+- compression (have msgs been reduced in size -> lossy vs lossless)
+- delivery guarantees (best effort, at least once, at most once, exactly once)
+- jitter (standard deviation of latency; high jitter-> more unnecessary retransmissions of msg parts (packets) -> higher msg latency)		
+- latency (time between two actions -> subscriber: end-to-end delay between publisher and subscriber; MOM: sum of publication + processing latency)
+- loss (package-loss)		
+- notification size (affects bandwidth, depends on resolution and compression of information)
+- order (random/unordered vs total order, or no order, publisher fifo, causal order, total order)
+- persistence (can MOM store notifications for a certain amount of time -> store&forward in case of disconnects, delivery guarantees)
+- priority (indicates notification precedence)
+- receiving rate (sum of notifications per time at subscriber)
+- response time ?
+- security (encryption, access control, authentication)
+
+(v.cardellini)
+- operator metrics : latency, deployment cost, availability
+- app-related: response time (worst end-to-end delay), cost (processing and transmission of the data streams)
+- network-related:  inter-node traffic (amount of data exchanged between operators on different nodes), network usage (amount of data at given time in the network), 					elastic energy (related to network usage, minimize data on link weighted by latency of the link)
+					
+- qos metrics measure an events' (or a streams) production quality or its transportation quality (-> network-related metrics)					
+- desired features of a system demand one or more specific qos metrics to be maintained/observed 
+
+(Appel,Sachs,Buchmann QoS in EBS)
+- QoS influenced by functional (e.g. ordered delivery) and non-functional (throughput, availability) properties
+- basic QoS metrics (latency, bandwidth, delivery guarantees) are technical, but insuffient/incomplete for capturing functional aspects influencing QoS
+- categorization of ebs features (mobility support, early filtering, real time capabilities, interval events) into categories to faciliate determining ebs system requirements -> mapping from features to related qos requirements
+- be mindful of interdependencies between features and their qos metrics
+- events have a production quality and are transported and processed with a certain quality -> information about the quality has to be maintained at the level of events (finer) or entire event streams (coarser) 
+- quality information can be managed/stored with events themselves or in a central repository
+- monitoring of qos can happen on middleware through statistical information events by the producers -> monitoring granularity influences overhead, tradeoff needed; middleware can adapt based on monitoring information to guarantee qos
+
+(Huang et al.,Operator Placement with QoS Constraints for
+Distributed Stream Processing)
+- operator placement as an optimization problem with minimization of network usage and end-to-end delay as goal; heuristic approach because problem is np-hard
+- optimization based on concept of optimization power (a nodes capability of reducing network usage and ability for QoS satisfaction)
+
+==================================================================================================================================================					
+ applications of ebs/cep
+
+- manufacturing, intrusion detection systems, financial services, web analytics, business intelligence, logistics, energy managment, network monitoring, traffic monitoring, data center monitoring ....
+
+==================================================================================================================================================
+
+feature models
+
+(Weckesser)
+- specifies a set of valid configurations, i.e. feature combinations satisfying all constraints between features
+- used in highly configurable software (e.g. product lines, cloud services) to specify available (boolean) configuration parameters (features)  and their constraints to define valid configurations(feature combinations that fulfill all constraints); notation: FODA (hierarchical tree with require/exclude relations)
+- paper proposes approach to model feature types beyond boolean attributes and constraints, and their cardinality/multiplicities, as well as impose constraints on their cardinality, exclusiveness/requirement; discusses anomalies (dead cardinality, cardinality interval gaps, false unbounded cardinality) introduced by these extensions; ways for validation
+- extended feature models (EFM): cardinality annotations (->copies) + non-boolean feature attributes
+- feature cardinality allows for imposing constraints on the number of instances as well as number of instanced types of features; model not only presence/absence of a feature but also amount of available resources
+
+
+(Saller et al.)
+- novel approach (feature model enriched with context information -> transition system for reconfigurations) for modeling context-aware DSPL adaptation scenarios for resource-constrained systems
+- definition of feature: relevant system property (during domain engineering) and/or configuration parameter for deriving specific variants of a product (during application engineering)
+- configuration: binding of all variability by selecting/deselecting every feature
+- notation for feature models: FODA, with alternatives, dependencies, mandatory/optional/require/exclude relations
+- contexts: represent distinct states of the environment -> context changes have an external cause; multiple contexts can be active in combination 
+- feature model constraints restrict the configuration space to valid configurations
+- reconfiguration planning is resource-intensive(space and time) if configuration space (variability) is not restricted based on context information -> reconfigure based on context changes
+- reconfiguration based on a transition model constructed at design-time for known scenarios as well as discovery of unknown scenarios at run-time (-> compute valid reconfiguration for a new context or combination of multiple contexts by using a constraint-solver)
+- feature model != context model: required features change depending on active context -> context-aware feature model (CFM) combines both and defines dependencies between contexts and features -> derive a transition system of configurations (states) and valid reconfigurations (transitions) triggered by context changes
+- context changes need to be detected
+- configuration space is restricted by feature constraints, and this reduced space is further restricted by context constraints; furthermore, if multiple valid configurations for a set of context requirements exists (because some features are unbound/not affected by the context), only one needs to be considered for transitions (-> partial states)
+- combination of context+features in CFM allows feature variability  and context requirement specification as one
+
+
+(maki seminar)
+non-functional properties:
+- avg link lifetime, latency, throughput, energy consumption (potentially conflicting!)
+- context features are given by environment and impose hard constraints on the system; soft constraints for quality goals are measured performance models and domain knowledge 
+- expected impact of context on system performance (-> non-functional properties) depend on degree of feature interactions (system features being dependent on context feature(s)) -> quantified by performance model and/or domain knowledge 
+- configuration selection as a linear optimization problem -> encode cfm tree structure and soft constraints as constraints, then minimize the configuration with minimum expected impact 
+(->Siegmund, Norbert, et al. "Predicting performance via automated feature-interaction detection)
+===================================================================================================================================================
+
+papers on context models
+
+(M. Archer, P. Collet, F. Fleurey, P. Lahire, S. Moisan,
+and J.-P. Rigault. Modeling Context and Dynamic
+Adaptations with Feature Models)
+- context is necessary for selecting and migrating to an apropriate configuration -> difficult at programming level because of many different possible configs
+- (Dynamic Software Product Lines) DSPLs re-configure at runtime by binding variation points
+- (Dynamic Adaptive System) DAS need to model variability of system and environment and specify adaptation rules (context->config, choice of components of the feature model)
+- paper proposes to model DAS and environment as two independent feature models which are then linked by dependency constraints that represent adaptation rules  -> homogeneous system+environment representation allows representation of relations between the two; case study: video processing application
+- context definition: minimal representation of application environment to support definition of adaptation rules; elements are only those relevant for adaptation 
+- "context is represented as a SPL (software product line) where each member of the SPL describes one valid state of the context"
+- two possible formalisms for adaptation rules: 1) event-condition-action rules (used here) 2) hard constraints+optimization of a utility function
+- feature attributes: used to represent sensor values sensed at runtime
+
+
+-R. Capilla, O. Ortiz, and M. Hinchey. Context
+variability for context-aware systems
+-H. Hartmann and T. Trew. Using feature diagrams
+with context variability to model multiple product
+lines for software supply chains
+(A.B.Cheikh et al.)
+
+(Freudenreich)
+situation context:
+- analysis of three survey papers leads to specification of required features for a context model for ebs (aspects: absolute and relative space+time, application as subject, no context history or user profiles; representation: key-value based, low formality, fully general, variable granularity, no valid context constraints; managment: context construction distributed and at runtime, basic context reasoning, hooks for incompleteness and context information quality monitoring, multi-context modelling)
+- context model for event-based architectures should allow for representation of relationships between concepts -> ontology-like, but cannot afford the expressive, but computationally expensive inference mechanisms -> need more direct relationship representation, a hybrid model
+- uses high-level declarative policies to describe situations and reaction to them
+- ontology meta-model to represent domain concepts with concepts, attributes and relationships (between concepts' attributes)
+-> no assumptions about domain model's data types or structure; context construction at runtime, context information structure constructed at design time; relationships for basic reasoning 
+- author argues against using existing ontology model OWL-DL for EBS because of costly reasoning
+interpretation context:
+- actress makes local interpretation of clients explicit, middleware mediates -> interpretation decoupling
+
+(E.Barrenchea)
+- paper proposes a context-aware event model, a context-aware pub/sub scheme and a debs framework -> publish and deliver events based on components context
+- context is part of the event model = it is a first class element and allows components to specify the context of its publications/subscriptions -> seperate context information from component logic and move it to the pub/sub scheme
+- context awareness is realized by context filters on publications and subscriptions that check the event schema -> components that are not context sources need not keep track of the context information
+- components are grouped into contextual environments, forming groups of "siblings"; these share the same context parameters and values (-> scoping); environment manager handles context updates, and provides access to context information for components on the application layer
+- events that affect context parameters of an environment affect all components in the environment
+- context filtering is based on the context parameters of the filtering components' environment; context updates however happen before filtering so they can propagate
+- definition context-awareness: both knowledge of and adaption to context
+- components using context filters in subscriptions are context-aware
+
+(Koripipää)
+- paper presents a uniform mobile terminal software framework for context (user's surroundings) acquisition and processing; API uses exptendible context ontology to define usable contexts; blackboard based communication between framework entities
+- contexts overlap, change and are only partially reliable
+- framework consists of context manager(blackboard for all context information, delivers to clients based on subscriptions or explicit query), resource server(connects to context data sources, processes & quantifies information with crisp or fuzzy limits, posts to context manager), context recognition service (receives context atoms and outputs higher-level context,allows sharing of recognized higher-level contexts, can be plugged in at runtime) and application
+- ontology for sensor-based context information provides a schema representing structure and properties of concepts; vocabulary for terms to describe context; schema described in RDF (Resource Description Language) syntax 
+- context information atoms have six properties: type (category), value, confidence, source, timestamp, attributes; only first two mandatory
+- supports composite contexts and context hierarchies
+- naive byes classifier for recognizing higher-level contexts, with confidence
+- clients can subscribe to context changes
+
+(Bolchini)
+- analysis framework for context models
+	1. key issues of developed application
+	2. survey existing models w.r.t. suitability to 1., in the following categories: 
+		I. modeled aspects:
+		- space
+		- time 
+		- absolute/relative space and time (coordinates/timestamp vs. near/after something)
+		- context history (does the current context state depend on previous ones)
+		- subject (what is the point of view -> user or app perspective)
+		- user profiles (are user preferences relevant for the context, how are they represented)
+		II. representation features:
+		- type of formalism (key-value,markup,logic,graph,ontology -> different intuitiveness,reasoning possibilities)
+		- level of formality
+		- flexibility (domain specific vs general)
+		- variable context granularity (ability to represent context at different levels of detail)
+		- valid context constraints (can the number of possible contexts be restricted by semantic constraints)
+		III. context managment and usage
+		- context construction (central description of possible contexts at design time vs distributed construction of the current context at runtime)
+		- context reasoning (ability to infer properties or construct higher-order context information from sensor readings)
+		- context information quality monitoring
+		- ambiguity and incompleteness handling (can the system handle incomplete/ambiguous/incoherent information and still generate sensible context information)
+		- automaitc learning features
+		- multi-context modeling (one instance of the model can represent all possible context, not one instance for each context)
+	3. 5 use classes with similar features and purpose:
+		A: Context as a matter of channel-device presentation (app is the subject, variable granularity, feature-based user profiling, centrally defined context)
+		B: Context as a matter of location and environment (time+space management, centralized context definition, information quality management)
+		C: Context as a matter of user activity (context history + reasoning, centralized context definition, user as subject, (automated learning)
+		D:Context as a matter of agreement and sharing between peers (distributed context definition, context quality monitoring, reasoning, incompleteness+ambiguity, high formality because of information sharing)
+		E: Context as a matter of selecting relevant data, functionalities and services (application as subject, variable granularity, valid context constraints, multi-context models, centralized context definition, time+space and user profiles)
+		-> category E most similar to context model for AdaptativeCEP
+==========================================================================================================
+
+
+(
+context model for non-functional properties (or QoS metrics?) of ADEBS:
+ - a model to represent context defined by...
+	- the status of elements that influence/determine these properties/metrics	
+	- as well as the relation of context to properties/metrics
+	
+ - what are these determining elements?! 
+ - what is the scope of the context elements -> may some hold globally, others just locally?
+ - what part(s) of the system are reliant on context information? which decisions are governed by it?
+
+- requirements for a context model: modeled aspects, capabilities, scope, usage purpose?
+
+ )
+ 
+(
+- papers regarding feature models:
+	- purpose is to capture context in order to adapt software system (= EBS) based on the requirements of the current context environment; features (= mechanisms) can be added or removed, respecting constraints and dependencies among each other
+)
+ 
+ ==================================================================================================
+ AdaptiveCEP framework
+ (p.weisenburger et al.)
+- goal: provide dynamic (and predictive) adaptation to environment based on environment changes (which have to be detected in real-time -> CEP); allow  developers the specification of QoS requirements for queries; allow specification of new adaptation strategies via a (Functional Reactive Programming-based) FRP interface
+- FRP uses signals to represent values that change over time; they are automatically updated whenever a change occurs
+- adaptation: choose optimal operator placement and execution algorithms based on environment; algorithms use global optimizations (event selection close to sources) and local optimizations (avoid high-latency links)
+- CEP system performance depends on query specification, query to operator graph mapping, operator graph to node mapping
+- QoS demands do not change functional dependencies in the operator graph
+- Stream represents event flows, their processing is determined by continuously active queries
+- Event is a timestamped record with (possibly) multiple fields of differing types; can be explicitly fired with fire method
+- queries are first-class elements -> can be used as function arguments, return value or be assigned to variables
+- possible QoS operators: demands on streams (latency, throughput, bandwidth) and demands under certain conditions (proximity, frequency); violated demands (as well as pending adaptation) trigger notifications
+- interfaces: System, consisting of CEPSystem (current hosts and operators) QoSSystem (quality measurements as signals, demand violation events), Operator (upstream and downstream operators, current host)
+- strategies (adaptation policy) use quality measurements provided to them to plan system adaptations; a strategy is a function that receives the System interface and outputs a event stream of adaptations; new strategies can be developed via a FRP-based interface;
+- monitoring services are functions that receive the CEPSystem interface as argument and produce and event stream of qos measurements; every service is monitoring one qos metric; low level implementation of measurements interact with the system backend
+- QoS measurements: currently measurements from each host are forwarded to a central coordinator which executes the strategies that can assume global knowledge of the system's state
+- event payloads are represented by statically typed tuples, (which can be acessed by name or index) and can be extended; based on Shapeless library
+- operators are realized as Akka actors; streams are messages from one actor to the next; more complex operators (join, sequence) use Esper
+
+
+current state:
+- monitors measure latency and bandwidth between hosts and their neighbours
+- events are timestamped
+- enforcement of quality demands via require-statements
+- current network is a fully connected mesh of 25 hosts
+- host is characterized by mapping of host to hostprops (bandwidth+latency to other hosts)
+- events are simple, flat structure
+- adaptations are calculated by a central instance
+
+1. key issues of developed application
+desirable properties:
+- system can detect environment changes and react quickly+efficiently
+- should be able to cope with joining/leaving hosts
+- allow for switching of adaptation strategies and definition of new strategies (that possibly use new qos metrics)
+- should know about entire network topology and status, in order to be able to optimize operator placement globally
+- in particular, know about status of hosts with operators deployed to them
+- possible dimensions of network status information: (latency, bandwidht, utilization, throughput, location, velocity (if nodes are mobile), ...)
+
+2.  requirements 
+
+requirements for a context model: (general, first ideas)
+- extensible for new types of relevant quality metrics
+- quick propagation of changes 
+- represent the status of the network in general and queries' hosts in particular
+- abstract from measurements to situations?
+- allow detection of transitions from one situation/state to another
+
+(structured, based on Bolchini analysis framework)
+	I. modeled aspects:
+	- space 
+	-> yes, necessary for proximity demands
+	- time 
+	-> yes, necessary to know "freshness" of information
+	- absolute/relative space and time (coordinates/timestamp vs. near/after something) 
+	-> abs+relative space, absolute time
+	- context history (does the current context state depend on previous ones) 
+	-> unclear, maybe for stability metrics of links; needed for machine learning purposes?
+	- subject (what is the point of view -> user or app perspective) 
+	-> app centric, system needs context information to optimize strategy usage
+	- user profiles (are user preferences relevant for the context, how are they represented) 
+	-> yes, if user == query, then Qos demands can be viewed as user preferences
+	II. representation features:
+	- type of formalism (key-value,markup,logic,graph,ontology -> different intuitiveness,reasoning possibilities) 
+	-> Context Feature Model == graph-based, alternatives?
+	- level of formality
+	- flexibility (domain specific vs general) 
+	-> specific to application, with enough flexibility for extensions
+	- variable context granularity (ability to represent context at different levels of detail)
+	-> 
+	- valid context constraints (can the number of possible contexts be restricted by semantic constraints)
+	-> can be expressed very well in CFM, useful for?
+	III. context managment and usage
+	- context construction (central description of possible contexts at design time vs distributed construction of the current context at runtime)
+	-> 
+	- context reasoning (ability to infer properties or construct higher-order context information from sensor readings)
+	- context information quality monitoring
+	-> no, would be "information quality of quality information"
+	- ambiguity and incompleteness handling (can the system handle incomplete/ambiguous/incoherent information and still generate sensible context information)
+	- automatic learning features
+	- multi-context modeling (one instance of the model can represent all possible context, not one instance for each context)
+	
+	
+	
+(re-) design of context model
+
+- decision goal: determine from changes in the context the optimal re-configuration of system features w.r.t. system performance and demand satisfaction; when does a strategy become suboptimal, when are QoS demands threatened?
+- definition of system feature: any part of the system that can be directly influenced/modified/configured
+- system feature: strategy (placement, distribution, replication)
+- context elements: QoS demands + their status (ok, threatened, violated), QoS metric values/classes (system view) -> situations (topology, traffic type, avg host utilization, link stability, avg availability, ... ), QoS metrics at node level, 
+- nodes+hosts+query( where to put these? see question 2) -> context, focus on mechanism choice
+
+open questions:
+1. is operator representation really necessary? QoS demands are defined(?) and checked for the entire query
+2. is the change of a placement by a mechanism a system reconfiguration? -> are queries reconfigurable "system features" (whose placement we can (directly?) influence)? or do we only directly influence the selection of the mechanism(s), making queries part of the context (not directly configured)? (separation between placement/replication adaptation through mechanisms and change of mechanisms); 
+
+============================================================================================================
+ - modelling approaches: key-value, markup scheme, graph-based, object-oriented, logic based, ontology based
+ 
+ basic requirements for a context model in ebs
+ - elements to capture: space, time, relationships, dependencies 
+ - desireable characteristics: flexible -> general, extensible, expressive, ease of use
+ - regarding intentions to use ML approaches: context history (time)?
+ - group context elements in a situation/environment (-> abstraction, hierarchy)? 
+- example context elements: network information, device capabilities/status, entity location and velocity, preferences
+
+
+======================================================================================================================
+Machine Learning
+
+general problem w.r.t. AdaptativeCEP:
+- given a context consisting of queries (operators (host (QoS metrics, location), QoS demands), strategy) and network conditions/characteristics (traffic type (burst vs steady), topology (central vs distributed), ...) 
+- ... find the best/most suitable mechanism(s) to optimise a QoS metric and satisfy all demands placed on operators...
+- i.e. classify instances (context + system configuration) into one of several categories (mechanism A, mechanism B, ...) 
+- problem: many combinations of query + operators + hosts + QoS demands possible -> training data acquisition difficult? (-> reduce amount of possible instances through restrictions imposed by context model?); 
+- different importance of dimensions -> weighting
+- maybe use a two-staged approach: use ML to classify network characteristics of single host into general network conditions: avg link lifetime -> network stability, avg host utilization -> burst traffic vs steady traffic, etc...; then use classification results as context elements to determine mechanisms to be used
+
+- possible techniques (must perform some sort of classification): 
+- decision trees, random forests
+- clustering (see montgomery paper)
+- support vector machines (seperate data points of dimension n by a hyperplane of dimension n-1 (linear) or kernel function that has maximum margin/distance to the nearest point of every category); only binary classification
+- kNearestNeighbour (compute distance, classify based on class of k nearest examples)
+- well-documented ML library: scikitlearn (python)
+ 
+
+(Montgomery, Clustering algorithm for N dimensional data)
+- statistical clustering in general: technique to analyze multi-dimensional data w.r.t it being organized in classes/clusters
+- k-mean or k-median need estimate of number and location of possible clusters a priori; parameter space is divided based on estimates; estimate quality affects outcomes and is based on human inspection of the data -> limited dimensionality of data
+- new method: no manual estimates required, no dimension limit, unsupervised; automatic estimation of number and location of clusters
+- 3 phases: 
+1.initial estimation of neighbourhoods by viewing every node as the center of a neighbourhood and increasing its radius until one neighbourhood includes 10% of all nodes, then sort by number of neighbours 
+2. inclusion/exclusion of additional nearby data points into neighbourhoods based on their similarity to the neighbourhoods statistical characteristics; similarity determined by z-score of new point w.r.t. projection of all neighbours onto the line from center to new point (projection is viewed as a distribution, converting euclidean to statistical distance -> calculate z-score of new point on this, include if score < 1,96, then recalculate center)
+3. cluster analysis and merging of redundant centroids until no further change in number or location of centroids
+-> algorithm can find number and location of clusters in multidimensional data without apriori estimates, i.e. identify different classes for data points; no assumptions about distribution of data points
+- evaluation: 5 dimensions, effective up to standard deviation of 0.8 of data point distribution, which is a overlap of 21.2%, and starts missing clusters at s.d. of 1.4 (47.8% overlap)
+-> applicability depends on distribution of the data; algorithm only finds similarities in data
+
+(Motti et al., Machine Learning in the Support of Context-Aware Adaptation)
+- paper deals with adaptation of UI based on use context to improve user interaction; gives a roadmap for applying ML to context aware adaptation problems
+- overview of ML techniques and their application in literature to context problems
+- abstraction of applications, identification of common requirements and goals, trade-offs
+- goals: associating/clustering, sorting of interactions, recommendations, hiding of unused elements, automation of always performed actions
+- learning process elements: adapting the weights of adaptaton rules in a decision tree, negative user feedback
+-> limited usefulness, too UI-centric; only technique overview helpful
+
+=================================================================================================
+A scenario for illustrating need of a transition-based system (e.g., placement strategies) with dynamic user requirements (QoS metrics)
+
+- characteristics: need for a change in utilized mechanisms, dynamic environment (network conditions change, hosts join and leave, quality demands change); e.g. reduced throughput of a host makes deployment of replication mechanism necessary, tightening of quality demands makes change of placement mechanism necessary, ...
+-> impulses for adaptation of system can come from user and/or environment
+
+
+possible influences of QoS metrics on system features/strategies:
+- availability -> replication mechanism
+- 
+ 
+===================================================================================================
+
+SPL Conqueror
+- purpose: library for learning influences of config options on non-functional properties
+- result is a model of influences, modeled as terms of configuration options and their weighted influence on a specific performance metric, which are learned iteratively with linear regression and stepwise feature selection
+- subprojects: 
+	- SPLConqueror Core: basic functionalities for software system variability modeling, with config options and constraints
+	- MachineLearning: algorithm for learning performance-influence model; interface for SAT checking of configurations w.r.t variability model and optimization of configuration for a given non-functional property and objective function
+	- PyML: interface to scikitlearn (python ML framework), different regression learning techniques
+	- CommandLine: specification and execution of experiments with different sampling strategies and ML techniques
+	- VariabilityModel_GUI: creation and editing of variability model of the configurable system
+	- PerformancePrediction_GUI: GUI for learning an influence model from a variability model and measurements (of configurations and their performance) with options for specifying sampling strategies
+	- SPLConqueror_GUI: visualizations for learned models
+
+
+- application  to AdaptiveCEP: learn from measurements (context+adaptationmechanism -> performance OR context -> performance of adaptationmechanism ?) the best adaptation mechanism for every context; SPLConqueror can determine the influence of every context element on the performance of the mechanism by using linear regression
+-> need to restrict combinations of context+adaptationmechanisms to valid ones to (limit necessary training data/measurements?)
+
+
+- how to measure performance for placement algorithms with different goals??
+
+I. (SPL Conqueror)
+1. for every mechanism, determine the influence of context features (or combinations of them) on the performance (performance w.r.t. optimized QoS metric?)
+2. result: formula to predict performance of a fixed mechanism for a given context (with weights for the influence of each context feature)
+3. from this, calculate the predicted performance of every mechanism for a given context configuration
+4. how to compare the performances? different measurement units (normalization to [0,1]? difficult, what upper/lower bounds to choose for latency, bandwidth, ... to make them comparable?)
+5. if reasonable comparison can be found: choose mechanism with best (normalised) performance for the given context
+
+II.
+1. for a training set of combinations of valid context configuration + placement mechanism, find the mechanism with the best performance for every context configuration (if too many combinations: restrict valid contexts more, include domain knowledge on suitability of mechanisms for situations)
+2. result are pairs of (context, mechanism)
+3. ML: for a new context, determine distance to k nearest examples -> choose mechanism that wins the (weighted) majority votes of the k nearest examples
+OR
+use a rule learning technique on the training data (off-line), generate a ruleset to categorize new contexts (at runtime)
+
+===========================================================================================================================
+what is necessary to adapt the system to changing network conditions?
+knowledge of...
+- current adaptation strategy (especially optimized QoS metric)
+- network status of nodes hosting operators -> detect major changes
+- QoS demand(s) on operators to choose an adaptation strategy that fits the current network situation and demands
+
+================================================================================================================================
+
+- placement strategy for every individual query or one for all queries?
+-> individual for a better fit based on qos demands
+-> one for cases where operator reuse is beneficial
+-> hybrid: group queries with similar/same qos demands, let them share a placement strategy
+
+
+categories: 
+- placement controller (central vs distributed, global vs local knowledge + optimizations) -> central better for static applications as solutions are usually more optimal; distributed better for quick local responses to frequent changes
+- load balancing -> if yes, suitable for unpredictable workload, if no, better for uniform workload
+- adaptation mechanisms (op. migration vs node level resource control (Amini)) -> if traffic is bursty, op migration causes overhead and instability; if it is uniform, decentralized op. migrations at runtime works well
+
+situation -> category
+- network stability(stable, dynamic) -> central vs. distributed placement control
+- workload(uniform, bursty) -> no load balancing vs. load balancing
+- traffic(uniform, bursty) -> operator migration vs. node level resource control 
+
+- Abadi (l,b): topology: clustered, data rates: uniform
+- Xing (initial: l, later: load balancing): topology: clustered, data rates: bursty
+- Amini(l,b,machine resources): topology: distributed, stability: dynamic, data rates: bursty
+- Pandit (l): topology: distributed, stability: uniform
+- Pietzuch(l*b): topology: distributed, stability: dynamic, data rates: uniform, (queries: redundant)
+- Ahmad(b or l*b): topology: distributed, stability: dynamic, data rates: uniform, (queries: heterogenous)
+- Cardellini(l,b,availability,cost -> weighted), stability: stable (because central placement decision)
+
+rule: qos req. + net situation -> placement mechanism
+QoS demands: latency+bandwidth, node location: clustered, data rate: uniform -> Abadi
+QoS demands: latency, node location: clustered, data rate: burst -> Xing
+QoS demands: latency+bandwidth, node location: distributed, stability: dynamic, data rate: bursty -> Amini
+QoS demands: latency, node location: distributed, stability: uniform-> Pandit
+QoS demands: latency,bandwidth, node location: distributed, stability: dynamic, data rates: uniform -> Pietzuch
+-> Ahmad
+QoS demands: latency,bandwidth,availability (weighted), data rate: uniform, stability: stable -> Cardellini
+
+
+Bonfils (b): 
+- assumptions:
+	- no global knowledge of sensor network
+	- nodes maintain only local information (of close neighbours)
+	- sensor network -> goal is to minimize amount of data transmitted -> minimize bandwidth
+	- queries are long-running
+	- 
+- active nodes (running an operator) and tentative nodes (estimating cost of running this operator instead) -> transfer to lowest cost node in intervals
+
+=========================================================================================================
+
+structure draft:
+- abstract (short; problem statement, assumptions, basic solution idea, results)
+
+- introduction
+	- general topic
+	- motivation (why is it necessary)
+	- problem statement (major issues, problem parts, proposed solution)
+	- overview of thesis structure
+	- example scenario (put this here or in background, or in evaluation?)
+
+- background  (= general introduction into basic building blocks of the thesis) 
+	- cep, including placement mechanisms and their assumptions + qos metrics
+	- context feature models
+	- relevant machine learning techniques
+
+- related work (= relation and difference to own work; categorize, evaluate, summarize other works; similar solutions but not necessarily directly related problems; understand limitations of other works -> avoid them if possible)
+	- context modeling for EBS 
+	- adaptiveness of EBS
+
+- design + implementation 
+	- in detail: problem analysis, identify important issues, describe proposed solution, justify solution, identify remaining issues
+- CFM design
+	- justification for choosing a CFM as a context model and not some possible alternative
+	- requirement analysis for AdaptiveCEP, derived requirements for the CFM
+	- explanation of design decisions
+	- explanation of model semantics and details
+	- way to determine fitting placement algorithm for a given context	
+	
+- implementation: prototypical implementation of CFM + adaptation into AdaptiveCEP
+
+- evaluation: set up testenvironment representing the introduced scenario, set up representative test cases for transitions between contexts, describe performance measuring, then compare performance of system in these cases without and with context awareness (if any implementation variants of the model present themselves during implementation, possibly compare these too)
+- analyze results: do they show an improvement by our solution, are there new issues uncovered by the evaluation
+
+- conclusion: recap, brief outline of motivation, problem and solution; based on the analysis: does the solution work as intended? strong points, problems -> future work
+
+=========================================================================
+report intro notes
+
+- what is the main issue? specify transitions from one context to another -> do this to be able to automatically select fitting placement algorithm, choice based on predicted (?) performance of algorithm in relation to new context
+
+1. motivation: why is specification of context transitions necessary? -> placement algorithm adaptation necessary
+2. problem description: how do we make that possible
+
+new, focus on CFM
+ - some applications have specific requirements -> QoS demands, adaptiveCEP
+ - influence of operator placement on QoS
+ - importance of correct placement mechanism choice
+ - necessary information for this decision -> context information, system state
+ - ways to model this information, CFM as a way to capture variability inherent to this system and its context
+ - ability of CFM to limit the space of valid configurations
+
+% measure the performance of a placement algorithm in relation to the context it is used in
+
+%capture and maintain up-to-date context information of the network and system, making it possible to select the most fitting algorithm after a transition has occurred
+========================================================================
+
+implementation ideas and considerations:
+- to conform with distributed system requirements (i.e. operation spread over several nodes):
+	- pass information between akka actors via messages
+	- context manager consists of collectors, 
+	- collectors are responsible for collecting context information; they send messages to request information from sources if they need it; or sources periodically send messages to collector(s)
+	- individual collectors for distinct context elements; all send to/answer to context manager
+	- integrate context aquisition and placement algorithm decsision making with the MAPEK class
+
+- how to implement a feature model? 
+	- especially in a way that reflects/preserves the variability of the model
+	-> use case classes for handling groups of features
+	-> how to have flexibility from case classes, but uniqueness of objects (for elements of xor groups)?
+	- and enforces constraints from the model (esp. xor groups, )
+	-> ?
+	- how to represent adaptation rules (context features (<<require>>) system feature, representing a change in used placement algorithm), need a way to include new ones for ML applicability
+	-> can message passing be used here as well? in the end, transitions from one algorithm to another is triggered by a message
+	
+
+- machine learning: 
+	- regression -> need test data for performance of every algorithm that is to be supported
+	- classification -> more algorithms means more possible classes, possibly increasing error; training data?
+
+evalutation ideas
+- if we can come up with a decent real-world application scenario, model that as evaluation cases
+- set up test scenarios where one or more transitions that make adaptation of the placement algorithm necessary occur; e.g. change of data rate from uniform to burst, increasing latency 
+- then compare performance (in terms of a QoS metric on which a demand is placed, e.g. latency) with and without mechanism adaptation
+- for machine learning approach specifically: goal is to predict the best placement algorithm for a given context, so compare performance of predicted algorithm to the algorithm known (or assumed) to be the best one for the scenario; 
+- this is similar to a case where the user of the system does not know which placement algorithm to use -> our approach might solve this problem as well, independent of transitions
+
+
+==========================================================================
+terminology: strategies, mechanisms, adaptation
+
+AdaptiveCEP paper:
+- strategy: specifies the adaptation policy to keep quality demands fulfilled via MAPE-K cycle
+- adaptation strategy: e.g. using operator migration when demand is violated
+
