@@ -447,11 +447,13 @@ situation -> category
 
 - Abadi (l,b): topology: clustered, data rates: uniform
 - Xing (initial: l, later: load balancing): topology: clustered, data rates: bursty
+- Heinze (FUGU)*(load balancing, processing latency): data rates: bursty, query stability: dynamic
 - Amini(l,b,machine resources): topology: distributed, stability: dynamic, data rates: bursty
 - Pandit (l): topology: distributed, stability: uniform
 - Pietzuch(l*b): topology: distributed, stability: dynamic, data rates: uniform, (queries: redundant)
 - Ahmad(b or l*b): topology: distributed, stability: dynamic, data rates: uniform, (queries: heterogenous)
 - Cardellini(l,b,availability,cost -> weighted), stability: stable (because central placement decision)
+*not in Lakshamanan paper
 
 rule: qos req. + net situation -> placement mechanism
 QoS demands: latency+bandwidth, node location: clustered, data rate: uniform -> Abadi
