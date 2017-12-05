@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<featuremodel:FeatureModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:featuremodel="http://www.eclipse.org/featuremodel" id="_-rOy0JWBEeeBuszfKg_50w">
+  <root id="_AjmCoJWCEeeBuszfKg_50w" name="System">
+    <children id="_BkA90JWCEeeBuszfKg_50w">
+      <features id="_Bj_vsJWCEeeBuszfKg_50w" name="Query">
+        <children id="_Qop6wJd8EeeHK9DROjnGvQ" lower="1">
+          <features id="_QonegJd8EeeHK9DROjnGvQ" name="Operator">
+            <children id="_Tt_7EJd8EeeHK9DROjnGvQ" lower="1">
+              <features id="_fVXcQZd7EeeHK9DROjnGvQ" name="Host">
+                <children id="_iSG6MJd7EeeHK9DROjnGvQ" lower="1">
+                  <features id="_iSEd8Jd7EeeHK9DROjnGvQ" name="&lt;location>"/>
+                </children>
+                <children id="_u_sAEJd7EeeHK9DROjnGvQ" lower="1">
+                  <features id="_u_pj0Jd7EeeHK9DROjnGvQ" name="QoS">
+                    <children id="_CfYWIJeAEeeHK9DROjnGvQ" lower="1">
+                      <features id="_CfXIAJeAEeeHK9DROjnGvQ" name="&lt;availability>"/>
+                    </children>
+                    <children id="_D2eE4JeAEeeHK9DROjnGvQ" lower="1">
+                      <features id="_D2cPsJeAEeeHK9DROjnGvQ" name="&lt;throughput>"/>
+                    </children>
+                    <children id="_FlP64JeAEeeHK9DROjnGvQ" lower="1">
+                      <features id="_FlOswJeAEeeHK9DROjnGvQ" name="&lt;avg latency>"/>
+                    </children>
+                  </features>
+                </children>
+              </features>
+            </children>
+            <children id="_Uc3zQJd8EeeHK9DROjnGvQ">
+              <features id="_Uc1-EJd8EeeHK9DROjnGvQ" name="QoS demand">
+                <children id="_UdUpwJd9EeeHK9DROjnGvQ" lower="0">
+                  <features id="_UdTboJd9EeeHK9DROjnGvQ" name="latency&lt;x">
+                    <children id="_sefYMJeHEeeHK9DROjnGvQ" lower="1" upper="1">
+                      <features id="_seexIJeHEeeHK9DROjnGvQ" name="safe"/>
+                      <features id="_tg6egJeHEeeHK9DROjnGvQ" name="threatened"/>
+                      <features id="_s6jCEJeHEeeHK9DROjnGvQ" name="violated"/>
+                    </children>
+                  </features>
+                  <features id="_dSpEoJd9EeeHK9DROjnGvQ" name="bandwidth>y"/>
+                </children>
+              </features>
+            </children>
+          </features>
+        </children>
+        <children id="_0NaMsJd8EeeHK9DROjnGvQ" lower="1">
+          <features id="_0NXwcJd8EeeHK9DROjnGvQ" name="Strategy">
+            <children id="_3OxE4Jd8EeeHK9DROjnGvQ" lower="0">
+              <features id="_3OvPsJd8EeeHK9DROjnGvQ" name="placement">
+                <children id="_AzF60Jd9EeeHK9DROjnGvQ" lower="1" upper="1">
+                  <features id="_AzEFoJd9EeeHK9DROjnGvQ" name="Alg.A (latency)"/>
+                  <features id="_IE4tcJd9EeeHK9DROjnGvQ" name="Alg.B (bandwidth)"/>
+                  <features id="_XlieQJeFEeeHK9DROjnGvQ" name="Alg.C (l+b)"/>
+                </children>
+              </features>
+              <features id="_5PrzwJd8EeeHK9DROjnGvQ" name="distribution"/>
+              <features id="_-Ga5MJd8EeeHK9DROjnGvQ" name="query opt."/>
+            </children>
+          </features>
+        </children>
+        <children id="_E2EucJeFEeeHK9DROjnGvQ" lower="1">
+          <features id="_E2DgUJeFEeeHK9DROjnGvQ" name="Topology">
+            <children id="_IRgTgJeFEeeHK9DROjnGvQ" lower="1" upper="1">
+              <features id="_IRfscJeFEeeHK9DROjnGvQ" name="distributed"/>
+              <features id="_JhYnAJeFEeeHK9DROjnGvQ" name="central"/>
+            </children>
+          </features>
+        </children>
+      </features>
+    </children>
+    <children id="_9HMzsJeDEeeHK9DROjnGvQ">
+      <features id="_9HLlkJeDEeeHK9DROjnGvQ" name="free host">
+        <children id="_IzSnYJeEEeeHK9DROjnGvQ" lower="1">
+          <features id="_IzQyMJeEEeeHK9DROjnGvQ" name="QoS">
+            <children id="_JcVkYJeEEeeHK9DROjnGvQ" lower="1">
+              <features id="_JcTvMJeEEeeHK9DROjnGvQ" name="&lt;avg latency>"/>
+            </children>
+            <children id="_NEYpIJeEEeeHK9DROjnGvQ" lower="1">
+              <features id="_NEWM4JeEEeeHK9DROjnGvQ" name="&lt;availability>"/>
+            </children>
+            <children id="_NfTqkJeEEeeHK9DROjnGvQ" lower="1">
+              <features id="_NfSccJeEEeeHK9DROjnGvQ" name="&lt;throughput>"/>
+            </children>
+          </features>
+        </children>
+        <children id="_a-8fgJeEEeeHK9DROjnGvQ" lower="1">
+          <features id="_a-74cJeEEeeHK9DROjnGvQ" name="&lt;location>"/>
+        </children>
+      </features>
+    </children>
+  </root>
+</featuremodel:FeatureModel>

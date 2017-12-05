@@ -17,13 +17,13 @@
 % general topic, motivation
 
 With the ever increasing number of hard- and software systems that generate continuous streams of heterogeneous data it becomes more difficult to extract meaningful information from this data and act upon it in real time. 
-Complex Event Processing (CEP) is a method that allows processing data streams from multiple sources by letting users specify events of interest as SQL-like queries and event patterns. These events are called complex events and result from the combination of several simple and other complex events through aggregation, composition and derivation operators.
+Complex Event Processing (CEP) is a method that allows processing data streams from multiple sources by letting users specify events of interest as queries. These events are called complex events and result from the combination of several simple and other complex events through aggregation, composition and derivation operators.
 
 If processing is performed centrally on one computing node, scaling of the system in terms of joining data sources, additional queries or an increase of the data rate is obviously limited. 
 Therefore, distributing the operators involved in the processing of the data over several computing nodes is beneficial, if not necessary, in many application scenarios.
 
-Since applications that have to react in real time to occurring events require a certain Quality of Service  (QoS) from the CEP engine, a solution to include QoS demands in a CEP system has been proposed with AdaptiveCEP \cite{Weisenburger2017a}. %TODO working reference to AdaptiveCEP paper
-It allows the specification of QoS demands on queries, e.g. that the end-to-end latency from data source over all participating processing nodes to the user has to be less than 100ms, or that the frequency of received events has to be above a certain rate. To satisfy such requirements, the choice of a fitting placement algorithm is crucial as it is responsible for the distribution of individual processing steps of a query onto a network of processing nodes. Every placement algorithm is designed with specific processing network characteristics (e.g. mobility, density) and QoS metric optimization goals in mind. These characteristics and the QoS demands from users constitute the context the system is operating in. Because of this, employing the wrong placement algorithm in a given context can have serious negative impact on the relevant QoS metrics and degrade performance of an application relying on the CEP system. 
+Since applications that have to react in real time to occurring events require a certain Quality of Service  (QoS) from the CEP engine, a solution to include QoS demands in a CEP system has been proposed with AdaptiveCEP \cite{Weisenburger2017a}.
+It allows the specification of QoS demands on queries, e.g. that the end-to-end latency from data source over all participating processing nodes to the user has to be less than 100ms, or that the frequency of received events has to be above a certain rate. To satisfy such requirements, the choice of a fitting placement algorithm is crucial as it is responsible for the distribution of individual processing steps of a query onto a network of processing nodes. Every placement algorithm is designed with specific  assumptions about processing network characteristics (e.g. mobility, density) and QoS metric optimization goals in mind. These characteristics and the QoS demands from users constitute the context the system is operating in. Because of this, employing the wrong placement algorithm in a given context can have serious negative impact on the relevant QoS metrics and degrade performance of an application relying on the CEP system. 
 
 \section{Problem Statement}
 % problem statement (major issues, problem parts, proposed solution)
@@ -88,92 +88,142 @@ chapter 2 includes background information on the topics of Complex Event Process
 \chapter{Background}
 \% general introduction into topics relevant to the thesis
 
-\%This chapter should give a comprehensive overview on the background necessary to understand the thesis. The chapter should have a length of about five pages!
+\% This chapter should give a comprehensive overview on the background necessary to understand the thesis. The chapter should have a length of about five pages!
 
-\section{Event-based Systems}
-\% EBS basics
-\% CEP: basics + relation to EBS, placement algorithms, other mechanisms
+\section{Event Processing Systems}
+\% TODO renamed, introduce DSP/ ESP (Data / Event Stream Processing), then explain relation to CEP (similarities and differences, merging tendencies)   
+\% CEP: basics + relation to EBS and/or stream processing, placement algorithms, other mechanisms
 \% QoS metrics, importance of QoS demands  
-\subsection{Preliminaries}
-%TODO adapt, taken from old intro
+%\subsection{Preliminaries}
 
-Data sources (producers) generate streams of data in the form of simple events (e.g. sensor readings) which can be aggregated and combined with other simple or complex events and domain knowledge to create complex events. 
-Interested parties (consumers) can define queries on event streams as complex events that can represent situations (specific event patterns) or specify further processing (aggregation, composition) of events.
-If event patterns matching the query are detected in the event stream, the CEP engine will notify any interested consumers immediately.
-This allows for timely reaction to new information by the consumers, making a whole range of new monitoring applications possible.
 
-%TODO re-use and re-write partly if possible
-%==== from OLD QOS+placement introduction, related work(placement) ====
-This becomes even more important if the producers and consumers are constrained by certain QoS demands, e.g. in a scenario with geographically spread out producers and consumers where a certain end-to-end latency must not be exceeded. In this case it is not possible to route all events to a central processing node as it will likely cause the latency limit to be exceeded. Therefore the computations involved in processing a query need to be distributed across several nodes.
+\% introduction to (Event) Stream Processing \\ \\
 
-To find and maintain a mapping of the query (in the form of a logical flow graph consisting of sources, operators and drains) to the network hosts that satisfies all QoS demands imposed on the query, placement strategies are utilized. 
-These strategies primarily handle the placement of the individual operators on hosts and try to optimize one or more QoS metrics in doing so and are periodically re-evaluated to check if the placement is still optimal or needs to be adjusted. 
-These QoS metrics can be, among others: 
+ 
+
+Complex Event Processing (CEP) is a term used for a technique that allows more involved analysis of event streams. The goal is to extract higher-level information from a stream of lower-level events by declaratively specifying events of interest through event patterns, often expressed in a query language. This allows the detection of events representing situations of interest that demand a reaction. As an example, an event pattern correlates incoming 'Smoke Particle Detected' events from a smoke particle sensor with aggregated 'Temperature' events if the average temperature of the last 30 seconds exceeded 60 degrees Celsius. If the CEP system detects a series of events from sensors in close proximity to location X that matches this pattern, it creates a complex event 'Fire in location X detected' and emits it to the interested parties (e.g. building monitoring system). 
+
+\%TODO explain relation to Data Stream Processing / Event processing \\ \\
+% different origins of cep and eps, terms converged over time; focus of esp: bulk stream data processing, cep: event pattern detection, causal dependencies -> find only the few relevant events in the stream
+While ESP systems rely mostly on aggregation operations, CEP systems traditionally focus more on detecting temporal and causal correlations in order to abstract to a higher level of information. However, more recent approaches have 
+
+\% definition of.... events, producers, consumers \\
+
+\% event definition \\ 
+An \textit{event} can be defined as anything that happens \cite{Chandy2011}, or more precisely, any meaningful change of state in the universe of an application that can be perceived through some kind of (physical or virtual) sensor. Depending on the application, a mere change in time can be an event, so any ordered sequence of data generated by a source like a light sensor can be interpreted as an \textit{event stream}. To be precise, when we use the term \textit{event} we actually mean a \textit{notification about an event}, not the event itself that caused the change of state. This \textit{event notification} is a message that contains one or more attribute-value fields and usually has a timestamp and a type.
+Data sources (producers) generate streams of data in the form of simple events (e.g. sensor readings) which can be processed using operators which combined and correlate them with other events and domain knowledge to create complex events. Complex events in turn can serve as further input for other operators.
+Interested parties (consumers) can subscribe to events of interest to them. These events of interest are represented by complex events and can be defined through queries consisting of aggregation, composition and derivation operators, which in turn are executed on event streams by the CEP system.
+
+This declarative approach to retrieving information is similar to traditional Database Management Systems (DBMS), hence the Query languages used in CEP and Data Stream Processing (DSP) in general are structurally very similar. 
+
+\%TODO possibly give example of SQL vs CQL or AdaptiveCEP query \\
+
+However, a major difference arises from the continuous nature of data processed in DSP and CEP applications: while in traditional DBMS a finite amount of data is stored persistently and can be accessed anytime, data streams are not persistent and potentially unbounded. This entails that instead of applying a new query to existing data, new data is applied to an existing query. 
+Furthermore aggregation operators can only work if some form of windowing is applied to the stream (e.g. a sliding window of the last 10 events received).
+
+\%types of operators in more detail \\
+Queries - sometimes also referred to as event patterns \cite{Luckham2011a} or event definition rules \cite{Cugola2013} - consist of one or more operators. These can be categorized as follows:
 \begin{itemize}
-\item latency 
-\item bandwidth utilization
-\item load balance
-\item cost of transport and processing
-\item reliability
-\item availability
-\item energy consumption
+\item Aggregation: operations that are applied to a finite set of values (i.e. a windowed set of events), like count, sum, average, median, minimum, maximum
+\item Composition: combination of information from two or more events, not necessarily of the same type, into a new event. This event conveys new information by relating two or more events to each other
+\item Derivation: using knowledge about domain semantics and/or external knowledge, a new event is derived through reasoning about information from incoming events and information from knowledge
 \end{itemize}
 
-Currently, most operator placement algorithms used in practice focus on optimizing latency and/or load balancing. 
-The placement of the operators cannot happen in an arbitrary way: some operators require a minimum of processing power or specific hardware; this is further constrained by sequential dependencies between operators: if an operator combines several simple or complex events, the operators that process these events need to be placed on processing nodes located upstream (viewed from the drain) of this operator's processing node, so this can reduce the number of feasible solutions. 
+
+The event processing system is responsible for the processing of incoming events and routing detected complex events to any interested consumers.
+This allows for timely reaction to new information by the consumers, enabling a range of real-time, reactive applications.
+
+\% short summary of possible applications \\
+\% applications (supply chain managment, healthcare, transportation, manufacturing, financial trading) and their requirements, scaling issues (-> link to distributed processing)
+
+CEP systems have various applications, among them the  domains of intrusion detection systems, credit card fraud detection, stock market trading, business intelligence, network monitoring, traffic monitoring, healthcare, transportation, supply chains and manufacturing. Due to the nature of some of these domains, event sources can be numerous and widely distributed, making CEP systems that rely on central processing susceptible to scaling issues. This calls for a distributed computing approach, which exists in the form of Distributed CEP.
+
+\subsection{Distributed Complex Event Processing}
+%queries, operator graphs
+%queries as a declarative way of stating what you look for wihtout knowing/caring where it originates;
+%relation to traditional databases and DSMS/EPS (=EBS?) which cannot detect sequences and ordering relations
+%time and space decoupling of producer and consumer?
+
+%distributed cep
+These operators can either be centrally processed, or their processing can be distributed over an overlay network of several independent processing nodes (hosts). Distributed processing makes CEP systems much more scalable: events do not incur additional producer-to-consumer latency from being routed to a central processing unit, network traffic is decreased because unnecessary events can be filtered on hosts closer to their sources, and operators can be replicated onto multiple hosts in case of high data rates and/or limited processing capabilities of hosts.
+
+
+
+\subsection{Adaptation mechanisms in CEP}
+\%placement algorithms \\
+\%purpose, assumptions, optimization goals, central vs decentral, task assignment problem NP-hard
+
+\% TODO rework, taken from old intro \\
+%TODO terminology: placement algorithm/mechanism
+Placement algorithms are utilized to find and maintain a mapping of the queries submitted to a CEP system to the network of processing nodes which is optimal w.r.t. some non-functional property (such as latency, bandwidth, load or combinations thereof).
+ Every placement algorithm attempts to optimize one or more non-functional properties and is designed  for specific situations characterised by network conditions like traffic type (bursty or uniform), network topology (distributed or clustered), and stability of connections and queries. 
+
+%(in the form of a logical flow graph consisting of sources, operators and drains) 
+These algorithms handle the distribution of the individual operators onto the network of processing nodes. For this several pieces of information are needed \cite{Lakshmanan2008a}:
+\begin{itemize}
+\item the queries to be placed, viewed as logical flow graphs consisting of event sources, operators, and drains
+\item the network of interconnected processing nodes that will host the operators of the flow graph
+\item measures or estimates of non-functional properties of the network and its nodes that are decisive for the placement choices  to be made, including, among others, latency and bandwidth of links, availability, processing speed of operators on a node 
+\item information about processing nodes' capabilities and operators' requirements that may constrain the placement
+\end{itemize}
+
+%TODO where to put this
+The operator placement problem is a specific instance of the task assignment problem which has been shown to be NP-hard, %TODO source
+hence placement algorithms use some heuristic function that is minimized/maximized to find a placement that is close to the optimal one.
+
+Placement algorithms can work in a centralized or distributed fashion, meaning that they have either information on the state of the entire network, allowing them to find globally optimal placements, or are restricted to local information from the node they are executed on and its neighbours, allowing them to make locally optimal placement decisions. Centralized algorithms tend to find globally better placements, but are restricted in their scalability due to the amount and frequency of necessary information exchange. 
+
+Most mechanisms periodically re-evaluate the current placement to check if it is still optimal or needs to be adjusted. While periodic re-evaluation of the placement enables the system to react to changes in the underlying network to a certain degree, there is currently no way to automatically adapt the utilized placement algorithm to major changes in the environment (context) that adversely affect the QoS demands.
+If any part of the network or application context (e.g. network conditions, network topology, type of QoS demands on queries, event frequency) is changed significantly, the placement algorithm that was used before may no longer be optimal as it was intended for a different context.
+The choice of the most fitting placement algorithm for the current context is crucial for system performance. 
+
+The placement of the operators cannot happen in an arbitrary way: some operators require a minimum of processing power or specific hardware; it is further constrained by sequential dependencies between operators: if an operator combines several simple or complex events, the operators that process these events need to be placed on processing nodes located upstream (viewed from the drain) of this operator's processing node, so this can reduce the number of feasible solutions. 
 
 Further mechanisms to satisfy QoS demands involve the optimization of the operator graph as well as parallelization by replication of operators.
 
 The choice of the appropriate strategy and its mechanisms depends on both the network conditions and the QoS demands imposed on the queries by users. As both can change over time, some form of context awareness and adaptability is necessary to guarantee a steady level of system performance.
 
 
-As some applications have specific requirements regarding the network conditions to function as intended, AdaptiveCEP offers the possibility to include QoS demands with every query. These QoS demands, e.g. end-to-end latency < x or bandwidth > y, are used to ensure that every host between source and drain involved in the processing of a query helps satisfying these requirements. 
-
-\subsection{Complex Event Processing}
-
-\subsection{Adaptation mechanisms in CEP}
-%placement algorithms
-
-To find and maintain a mapping of the query (in the form of a logical flow graph consisting of sources, operators and drains) to the network hosts that satisfies all QoS demands imposed on the query, placement mechanisms are utilized. 
-These mechanisms primarily handle the placement of the individual operators on hosts and are designed  for specific situations characterised by network conditions like traffic type (bursty or uniform), network topology (distributed or clustered), stability of connections and queries, and to optimize one or more QoS metrics. This makes the choice of the most fitting placement mechanism crucial for the system performance. 
-
-Most mechanisms periodically re-evaluate to check if the placement is still optimal or needs to be adjusted. While periodic re-evaluation of the placement enables the system to react to changes in the underlying network to a certain degree, there is currently no way to adapt the utilized placement mechanism to major changes of the application context that affect the QoS demands in an automated way.
-If any part of the application context (e.g. network conditions, network topology, consumers' preferences of QoS metrics) is changed significantly, the placement algorithm that was used before may no longer be optimal as it was intended for a different context.
-
-%TODO include relevant parts
-The paper Placement Strategies for Internet-Scale Data Stream Systems  by Geetika T. Lakshmanan, Ying Li and Rob Strom is a survey of 8 algorithms developed to solve the problem of optimal operator placement in data stream processing systems. To compare the different approaches, the authors define a set of core components that significantly affect the performance of the system and compare the categories of these components: 
-
-\begin{itemize}
-\item architecture (centralized, decentralized or hybrid implementation of placement logic)
-\item algorithm structure (centralized vs decentralized decisions)
-\item metric(s) to optimize (load, latency, bandwidth, machine resources, operator importance, combinations of those)
-\item operator-level operations (reuse or replication of operators) 
-\item reconfiguration (triggers for operator migration: thresholds, periodic re-evaluation, constraint violation)
-\end{itemize}
-
-Based on these components, 8 placement algorithms developed respectively by Pietzuch, Balazinska, Abadi, Zhou, Kumar, Ahmad, Amini and Pandit are assigned to the discussed categories. The authors then proceed by comparing the algorithms w.r.t. their design decisions and underlying assumptions. It is concluded that decentralized approaches which are able to adapt dynamically by operator migration are prevalent, with latency and, by extension, load balancing being the preferred metrics to optimize. 
-Based on the comparison of the assumptions a decision tree for selecting a fitting placement algorithm considering the characteristics of a given problem (node distribution, number of administrative domains, dynamics of topology and data, query diversity) is proposed.
-
-
 %=====================================================
 \subsection{Quality of Service in CEP}
 
-\section{Context-Awareness and Transition-based Systems}
-\% relevance of context-awareness to enable adaptability of systems
-\% introduction to self-adaptive systems that profit from mechanism transitions, (examples in related work?)
+%TODO introduce AdaptiveCEP here or in related work? \\
+%As some applications have specific requirements regarding the network conditions to function as intended, AdaptiveCEP offers the possibility to include QoS demands with every query. These QoS demands, e.g. end-to-end latency < x or bandwidth > y, are used to ensure that every host between source and drain involved in the processing of a query helps satisfying these requirements. 
 
-\section{Context Modeling}
+
+\%TODO re-use and re-write partly if possible
+\%==== from OLD QOS+placement introduction, related work(placement) ====\\
+This becomes even more important in a scenario with geographically spread out producers and consumers where a certain end-to-end latency must not be exceeded. In this case it is not possible to route all events to a central processing node as it will likely cause the latency limit to be exceeded. Therefore the computations involved in processing a query need to be distributed across several nodes.
+
+Placement algorithms handle the placement of the individual operators on hosts and try to optimize one or more QoS metrics in doing so and are periodically re-evaluated to check if the placement is still optimal or needs to be adjusted. 
+These QoS metrics can be, among others: 
+\begin{itemize}
+\item latency 
+\item bandwidth consumption
+\item load balancing
+\item reliability
+\item availability
+\item energy consumption
+\end{itemize}
+
+Currently, most operator placement algorithms used in practice focus on optimizing latency and/or load balancing. 
+
+
+\section{Context Models}
 
 %
 \subsection{Types of Context Models}
 \% different types of models and their pros and cons (-> justification of FM choice?), properties
 \subsection{Dynamic Software Product Lines and Feature Models}
-\% introduction with a small example
-\% terms and definitions, FODA notation
+\% introduction with a small example \\
+\% terms and definitions, FODA notation \\
+\% relevance of context-awareness to enable adaptability of systems \\
+\% introduction to self-adaptive systems that profit from mechanism transitions, (examples in related work?)
+
 \subsection{Context Feature Models} 
 \% may be moved to related work as it is best explained in context of other work and is directly relevant to the thesis
 \section{Machine Learning}
-\% depending on type of the actual technique used
+\% depending on type of the actual technique used \\
 \% explanation of general principle, examples of application
 \subsection{Regression Learning}
 \subsection{Classification}
@@ -182,7 +232,7 @@ Based on the comparison of the assumptions a decision tree for selecting a fitti
 
 
 \chapter{Related Work}
-\% relevant work on related topics
+\% relevant work on related topics \\
 \% categorize, evaluate, summarize other works, show differences and parallels; similar solutions but not necessarily similar problems; understand limitations of other works -> avoid these limitations if possible)
 
 \% This chapter should give a comprehensive overview on the related work done by other authors followed by an analysis why the existing related work is not capable of solving the problem described in the introduction. The chapter should have a length of about three to five pages!
@@ -190,8 +240,8 @@ Based on the comparison of the assumptions a decision tree for selecting a fitti
 \section{Context Modeling for Event-based Systems}
 
 \subsection{Context Modeling Techniques}
-\% survey related work on techniques that don't use FM, point out pros and cons
-\% possible considerations for design and implementation, things to avoid and things to have
+\% survey related work on techniques that don't use FM, point out pros and cons \\
+\% possible considerations for design and implementation, things to avoid and things to have \\ \\
 
 %move this information to background?
 Freudenreich explicitly differentiates between situation context (information about environment) and interpretation context (information about data). Regarding the modeling of situational context of event-based systems he identifies the following required features and characteristics, based on three surveys of different context models: 
@@ -236,7 +286,22 @@ Saller et al. aim to enrich feature models with context information and context 
 Weckesser et al. propose an approach that extends the expressiveness of feature models as well as the possibilities to validate them. It allows for modeling  of feature attribute types and constraints beyond boolean as well as UML-like multiplicities of features. Furthermore, they enable automated validation of such cardinality-based feature models through methods that check the constraints imposed on the feature model by cardinality annotations. This is useful when dealing with systems that have multiple instances of a feature and need to take dependencies among them (and their number) and other features into account.
 
 \section{Adaptation and Context-Awareness for EBS}
-\% AdaptiveCEP paper
+\% AdaptiveCEP paper\\ \\
+\% Lakshmanan placement algorithm classification \\
+%TODO include relevant parts
+The work of G. Lakshmanan et al. \cite{Lakshmanan2008} is a survey of 8 algorithms developed to solve the problem of optimal operator placement in data stream processing systems. To compare the different approaches, the authors define a set of core components that significantly affect the performance of the system and compare the categories of these components: 
+
+\begin{itemize}
+\item architecture (centralized, decentralized or hybrid implementation of placement logic)
+\item algorithm structure (centralized vs decentralized decisions)
+\item metric(s) to optimize (load, latency, bandwidth, machine resources, operator importance, combinations of those)
+\item operator-level operations (reuse or replication of operators) 
+\item reconfiguration (triggers for operator migration: thresholds, periodic re-evaluation, constraint violation)
+\end{itemize}
+
+Based on these components, 8 placement algorithms developed respectively by Pietzuch, Balazinska, Abadi, Zhou, Kumar, Ahmad, Amini and Pandit are assigned to the discussed categories. The authors then proceed by comparing the algorithms w.r.t. their design decisions and underlying assumptions. It is concluded that decentralized approaches which are able to adapt dynamically by operator migration are prevalent, with latency and, by extension, load balancing being the preferred metrics to optimize. 
+Based on the comparison of the assumptions a decision tree for selecting a fitting placement algorithm considering the characteristics of a given problem (node distribution, number of administrative domains, dynamics of topology and data, query diversity) is proposed.
+
 
 \section{Performance Prediction using Feature Models}
 \% survey of SPLConqueror (if not used, replace section heading in accordance with other ML-related papers)
@@ -257,7 +322,7 @@ SPLConqueror is a collection of programs and a library for discovering the influ
  3. with this, calculate the predicted performance of every mechanism for a given context configuration
  4. compare the performance predictions of the different mechanisms for a given context configuration; problem: how to compare performance measured in different metrics? Can it be reasonably normalized to [0,1], if yes, what lower/upper bounds to choose for latency, bandwidth, ... to make them comparable?
  5. if reasonable comparison of performance metrics can be found: choose mechanism with best (normalised) performance for the given context
-
+\section{Comparative Analysis and Discussion} 
 \section{Summary}
 
 \chapter{Context-aware Feature Model and Mechanism Transition Approach}

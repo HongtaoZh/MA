@@ -1,0 +1,26 @@
+22.8.
+- TODO: rework introduction and goals; overview of SPL Conqueror; re-read + considerations on context feature model cardinality and its purpose
+
+- discussion on: 
+	- intention and purpose of context model -> valid configuration space -> application of machine learning techniques
+	- transitions between configurations do model adaptations/change of strategies
+	- design paradigm separation of concerns -> policies and mechanisms 
+	- current state of the system and planned extensions (take into consideration for model): 
+		1. adaptation strategies 
+		2. interface for mechanisms (placement, distribution, query optimization) to implement migration/placement policies
+		3. location and its importance for mobile scenarios and range demand
+	- ways to model constraints (exclusively graph structure/path vs additional propositional logic formulas)
+	- appropriateness of context feature modeling technique, regarding coupling of context and system
+	- regarding last point: can limitations be shown? if yes, possible contribution
+	- ways to capture properties of placement mechanisms (-> Lakshaman,Li,Strom  paper suggests a decision tree to select a mechanism)
+=========================================================================
+
+19.9.
+discussion on:
+- SPLConqueror: can be used to determine the influence of feature combinations(!) on some defined system performance measure -> uncover influence of system configurations on performance of Strategies; off-line learning
+- need for a model of system + context, importance of separation of these
+- steps of domain engineering for a context model: 1. enumerate variable features 2. decompose/structure them in a hierarchy, restricting the configuration space this way (additional constraints possible)
+- place for QoS metrics: should belong to context, as they cannot be reconfigured directly like a system feature
+- possible hierarchy for context: system/global view + node/local view
+- need for a way to represent cardinality and test constraints imposed by it in practice
+- decision goals of the model (what decisions are governed by the modeled data (?))
