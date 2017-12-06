@@ -108,3 +108,18 @@ I'm skipping whatever remains of this entry
 Warning--I didn't find a database entry for "Weisenburger2017a"
 Warning--there's a number but no volume in Chandy2011
 (There were 2 error messages)
+This is BibTeX, Version 0.99d (TeX Live 2016/Debian)
+The top-level auxiliary file: tudkom.aux
+The style file: plainnat.bst
+Database file #1: library.bib
+Repeated entry---line 852 of file library.bib
+ : @article{Dey2001
+ :                 ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 955 of file library.bib
+ : @article{Acher2009
+ :                   ,
+I'm skipping whatever remains of this entry
+Warning--I didn't find a database entry for "Weisenburger2017a"
+Warning--there's a number but no volume in Chandy2011
+(There were 2 error messages)
