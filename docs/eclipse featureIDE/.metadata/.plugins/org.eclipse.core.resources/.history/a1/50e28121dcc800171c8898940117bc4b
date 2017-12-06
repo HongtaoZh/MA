@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-	<configuration>
-		<feature automatic="undefined" manual="undefined" name="FeatureIDEcontextmodel"/>
-		<feature automatic="undefined" manual="undefined" name="Base"/>
-		<feature automatic="undefined" manual="undefined" name="NewFeature1"/>
-	</configuration>
