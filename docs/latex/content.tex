@@ -3,7 +3,6 @@
  
 %\end{abstract}
 
-
 %*****************************************
 \chapter{Introduction and Motivation}
 %*****************************************
@@ -16,44 +15,43 @@
 	
 % general topic, motivation
 
-With the ever increasing number of hard- and software systems that generate continuous streams of heterogeneous data it becomes more difficult to extract meaningful information from this data and act upon it in real time. 
-Complex Event Processing (CEP) is a method that allows processing data streams from multiple sources by letting users specify events of interest as queries. These events are called complex events and result from the combination of several simple and other complex events through aggregation, composition and derivation operators.
-
-If processing is performed centrally on one computing node, scaling of the system in terms of joining data sources, additional queries or an increase of the data rate is obviously limited. 
+With the ever increasing number of hard- and software systems that generate continuous streams of heterogeneous data it becomes more difficult to extract meaningful information from this data and act upon it in real time. \gls{cep} is a method that allows processing data streams from multiple sources by letting users specify events of interest as continuous queries. Events resulting from the combination of several simple and other complex events through aggregation, composition and derivation operators are called complex events.
+If the \gls{cep} system detects a complex event that matches a query, all interested users will be notified of the event's occurrence immediately. 
+If processing of the operators involved in detecting complex events is performed centrally on one computing node, scaling of the system in terms of joining data sources, additional queries or an increase of the data rate is obviously limited. 
 Therefore, distributing the operators involved in the processing of the data over several computing nodes is beneficial, if not necessary, in many application scenarios.
 
-Since applications that have to react in real time to occurring events require a certain Quality of Service  (QoS) from the CEP engine, a solution to include QoS demands in a CEP system has been proposed with AdaptiveCEP \cite{Weisenburger2017a}.
-It allows the specification of QoS demands on queries, e.g. that the end-to-end latency from data source over all participating processing nodes to the user has to be less than 100ms, or that the frequency of received events has to be above a certain rate. To satisfy such requirements, the choice of a fitting placement algorithm is crucial as it is responsible for the distribution of individual processing steps of a query onto a network of processing nodes. Every placement algorithm is designed with specific  assumptions about processing network characteristics (e.g. mobility, density) and QoS metric optimization goals in mind. These characteristics and the QoS demands from users constitute the context the system is operating in. Because of this, employing the wrong placement algorithm in a given context can have serious negative impact on the relevant QoS metrics and degrade performance of an application relying on the CEP system. 
+Since applications that have to react in real time to occurring events require a certain \gls{qos} from the \gls{cep} engine, a solution to include \gls{qos} demands in a \gls{cep} system has been proposed with AdaptiveCEP \cite{Weisenburger2017a}.
+It allows the specification of \gls{qos} demands on queries, e.g. that the end-to-end latency from data source over all participating processing nodes to the user has to be less than 100ms, or that the frequency of received events has to be above a certain rate. To satisfy such requirements, the choice of a fitting placement algorithm is crucial as it is responsible for the distribution of individual processing steps of a query onto a network of processing nodes. Every placement algorithm is designed with specific  assumptions about processing network characteristics (e.g. mobility, density) and \gls{qos} metric optimization goals in mind. These characteristics and the \gls{qos} demands from users constitute the context the system is operating in. Because of this, employing the wrong placement algorithm in a given context can have serious negative impact on the relevant \gls{qos} metrics and degrade performance of an application relying on the \gls{cep} system. 
 
 \section{Problem Statement}
 % problem statement (major issues, problem parts, proposed solution)
-While in a static context only the initial choice of the placement algorithm is important, in an application scenario with dynamic context the optimal placement algorithm may change over time because the network conditions or QoS demands can change significantly, making a switch from one placement algorithm to another necessary. Such a change of mechanism is called a transition, triggered by the system moving from one context to another. The aspects that can be responsible for such a change are, among others, node topology (clustered vs. distributed) and traffic type (burst vs. uniform). 
+While in a static context only the initial choice of the placement algorithm is important, in an application scenario with dynamic context the optimal placement algorithm may change over time because the network conditions or \gls{qos} demands can change significantly, making a switch from one placement algorithm to another necessary. Such a change of mechanism is called a transition, triggered by the system moving from one context to another. The aspects that can be responsible for such a change are, among others, node topology (clustered vs. distributed) and traffic type (burst vs. uniform). 
 % adaptation here refers to changes the system makes because of periodic recalculations to adapt to slight changes in network conditions;
 % reconfiguration refers to changes in the adaptation strategy and its mechanisms (== adaptation on a higher level)
 %TODO check for consistency with weisenburger paper, section 4B
-%An adaptation strategy consists of several mechanisms (e.g. placement algorithm, query optimization) that determine how the system reacts to relatively small changes in the network QoS metrics.
+%An adaptation strategy consists of several mechanisms (e.g. placement algorithm, query optimization) that determine how the system reacts to relatively small changes in the network \gls{qos} metrics.
 The ability to dynamically reconfigure the mechanisms of the system at run-time based on the context is necessary to assure stable and reliable system operation in the face of significant changes in network conditions and user demands. 
 In this work we will focus on reconfiguring the most influential mechanism, namely the deployed placement algorithm, but any other mechanism could be reconfigured as well. 
 
 In order to perform reconfigurations of the mechanisms at run-time, we need two pieces of information: first, up-to-date information on the current context to determine if a significant environment change has occurred and what the new context is; and second the most fitting mechanism(s) to transit to in the new context.
  
-%Context information is, according to Etzion: \textit{" [...] indirectly relevant information that is useful to functioning of the service, but not provided to the service as part of its invocation"}, so in our case, any information that is relevant for determining what mechanism to use (i.e. information about network conditions, network QoS metrics, QoS demands), but is not provided by the user as part of a query. 
+%Context information is, according to Etzion: \textit{" [...] indirectly relevant information that is useful to functioning of the service, but not provided to the service as part of its invocation"}, so in our case, any information that is relevant for determining what mechanism to use (i.e. information about network conditions, network \gls{qos} metrics, \gls{qos} demands), but is not provided by the user as part of a query. 
 %TODO source (Etzion paper)
-%TODO problem: qos demands are user-provided, but they are (very) relevant for determining what mechanism to use -> context or system in CFM? more logical to keep it together with query qos metrics
+%TODO problem: \gls{qos} demands are user-provided, but they are (very) relevant for determining what mechanism to use -> context or system in \gls{cfm}? more logical to keep it together with query \gls{qos} metrics
 
 According to Dey \cite{Dey2001}, context is \textit{"any information that can be used to characterize the situation of an entity. An entity is a person, place, or object that is considered relevant to the interaction between a user and an application, including the user and application"}.
-In our case, relevant information is any information that helps determining what mechanism to use (i.e. information about network conditions, network QoS metrics, user QoS demands) without the user having to set it manually.
+In our case, relevant information is any information that helps determining what mechanism to use (i.e. information about network conditions, network \gls{qos} metrics, user \gls{qos} demands) without the user having to set it manually.
 This information must be captured in a structured way so that it can be automatically processed and used to determine the placement algorithm to be used.  
 Due to the inherent variability of both system (utilized placement algorithm, processing nodes) and context we need a modeling technique that is suited to capture the possible configurations of our system and its context in a coherent way. 
-Such a technique is available in the form of Dynamic Software Product Lines (DSPL) which can be represented as graph-based Feature Models (FM). Prior work has shown their ability to model context-based adaptation of a system with the help of so called Context-aware Feature Models (CFM) \cite{Saller2013} \cite{Acher2009}.
-Feature Models have their origin in (Dynamic) Software Product Lines that represent different variants of a software system. They are used to specify variation points and the possible alternatives (features) at these points as well as constraints between these alternatives. A product configuration is created by 
+Such a technique is available in the form of \Gls{dspl} which can be represented as graph-based \gls{fm}. Prior work has shown their ability to model context-based adaptation of a system with the help of so called \Gls{cfm} \cite{Saller2013} \cite{Acher2009}.
+Feature Models can represent (Dynamic) Software Product Lines which model different variants of a software system. They are used to specify variation points and the possible alternatives (features) at these points as well as constraints between these alternatives. A product configuration is created by 
  selecting or deselecting every feature, and is only valid if it respects all constraints between features.
  
- As the several variable parts of the context are important for deciding what adaptation to make in the system, modeling them as separated System Features (directly configurable system parts, e.g. placement algorithm) and Context Features (influences that cannot be controlled directly, e.g. network metrics, QoS demands) together in one model is a reasonable choice.
- By interpreting different context states as different configurations, we can identify changes between contexts by observing changes in the configuration of the context side of the CFM and then, based on these observations, trigger appropriate transitions from one mechanism to another, represented by a reconfiguration of the system side of the CFM. 
+ As the several variable parts of the context are important for deciding what adaptation to make in the system, modeling them as separated System Features (directly configurable system parts, e.g. placement algorithm) and Context Features (influences that cannot be controlled directly, e.g. network metrics, \gls{qos} demands) together in one model is a reasonable choice.
+ By interpreting different context states as different configurations, we can identify changes between contexts by observing changes in the configuration of the context side of the \gls{cfm} and then, based on these observations, trigger appropriate transitions from one mechanism to another, represented by a reconfiguration of the system side of the \gls{cfm}. 
  % reference to Saller paper, where reconfiguration of the system is handled by a transition system; number of possible reconfigurations is limited through constraints between context features and system features, which allows
  By structuring the model through constraints and dependencies (between context features and system features as well as among context features) the space of possible configurations is limited to valid ones. This limits the amount of possible reconfigurations of the system, in our case the choice of the placement algorithm, to those allowed by the model.  
- Our aim is to determine the most fitting placement algorithm for a given configuration of Context Features; to achieve this, we propose to either predict the performance of every placement algorithm that is allowed by the constraints in this context configuration through some form of regression, or train a classifier to predict the most fitting placement algorithm based on the current context. 
+ Our aim is to determine the most fitting placement algorithm for a given configuration of context features; to achieve this, we propose to either predict the performance of every placement algorithm that is allowed by the constraints in this context configuration through some form of regression, or train a classifier to predict the most fitting placement algorithm based on the current context. 
  %TODO to keep or not to keep?
  In the first case, model constraints limit the number of different placement algorithms to be considered for a given context; in the second case, the amount of required training data is limited to instances with valid context configurations.
  
@@ -62,14 +60,14 @@ Feature Models have their origin in (Dynamic) Software Product Lines that repres
 
 % thesis goals/aims
 \section{Goals}
-This thesis aims to explore context-dependent transitions of mechanisms in CEP systems and how to model them in order to enable self-adaptation of the system's adaptation behaviour, specifically the placement algorithm. 
+This thesis aims to explore context-dependent transitions of mechanisms in \gls{cep} systems and how to model them in order to enable self-adaptation of the system's adaptation behaviour, specifically the placement algorithm. 
 To achieve this, the following contributions will be made:
 \begin{itemize}
 \item Review of relevant literature on context modeling, especially with the help of feature models, and context-based adaptation of event-based systems
-\item Identification of required properties of a context model to represent an adaptive CEP system
-\item Design of a CFM that allows to capture context changes and QoS demands. This model allows to restrict the space of valid mechanism configurations eligible for a transition
-\item Design of a machine learning approach for placement algorithm selection based on user QoS demands and constraints imposed by the CFM
-\item To prove the applicability of our approach, the existing CEP system AdaptiveCEP will be extended with a prototypical implementation of the designed context model and a module that allows adapting the deployed placement algorithm at run-time based on the context information gathered by our model
+\item Identification of required properties of a context model to represent an adaptive \gls{cep} system
+\item Design of a \gls{cfm} that allows to capture context changes and \gls{qos} demands. This model allows to restrict the space of valid mechanism configurations eligible for a transition
+\item Design of a machine learning approach for placement algorithm selection based on user \gls{qos} demands and constraints imposed by the \gls{cfm}
+\item To prove the applicability of our approach, the existing \gls{cep} system Adaptive\gls{cep} will be extended with a prototypical implementation of the designed context model and a module that allows adapting the deployed placement algorithm at run-time based on the context information gathered by our model
 \item Evaluation of the implementation in selected simulated scenarios to quantify potential performance gains.
 \end{itemize} 
 
@@ -78,8 +76,8 @@ To achieve this, the following contributions will be made:
 %TODO adapt as necessary
 \section{Outline}
 The remainder of this document is structured as follows: 
-chapter 2 includes background information on the topics of Complex Event Processing, Context Feature Models and Machine Learning and surveys and analyzes related work in the area of Context Feature Models in Dynamic Software Product Lines and adaptive CEP systems. Furthermore we will introduce an application scenario to give a practical example to refer to in the next chapters.
- In chapter 3 we will perform a context model requirement analysis for AdaptiveCEP, present and justify our CFM design and explain the prototypical implementation of the model and the adaptation mechanism.
+chapter 2 includes background information on the topics of Complex Event Processing, Context Feature Models and Machine Learning and surveys and analyzes related work in the area of Context Feature Models in Dynamic Software Product Lines and adaptive \gls{cep} systems. Furthermore we will introduce an application scenario to give a practical example to refer to in the next chapters.
+ In chapter 3 we will perform a context model requirement analysis for Adaptive\gls{cep}, present and justify our \gls{cfm} design and explain the prototypical implementation of the model and the adaptation mechanism.
  Chapter 4 covers the evaluation methods, results and their discussion
  In the final chapter 5 we will recap the thesis and reflect on the proposed solution and its results as well as possible future work.
 
@@ -91,35 +89,40 @@ chapter 2 includes background information on the topics of Complex Event Process
 \% This chapter should give a comprehensive overview on the background necessary to understand the thesis. The chapter should have a length of about five pages!
 
 \section{Event Stream Processing}
-\% TODO renamed, introduce DSP/ ESP (Data / Event Stream Processing), then explain relation to CEP (similarities and differences, merging tendencies)   
-\% CEP: basics + relation to EBS and/or stream processing, placement algorithms, other mechanisms
-\% QoS metrics, importance of QoS demands  
+\% renamed, introduce DSP/ \gls{esp} (Data / Event Stream Processing), then explain relation to \gls{cep} (similarities and differences)   
+\% \gls{cep}: basics + relation to EBS and/or stream processing, placement algorithms, other mechanisms
+\% \gls{qos} metrics, importance of \gls{qos} demands  
 %\subsection{Preliminaries}
 
 
 \% introduction to (Event) Stream Processing \\ \\
 
- 
+The task of processing streams of data from multiple sources has been approached from two different research directions. The first approach is inspired from the area of \Gls{dbms} which persistently store data and allow users to query it on demand. As this is not an applicable approach when dealing with applications that need to process continuous streams of data from from many sources and update the results of queries to them in real-time, \glspl{dsms} have been developed to address this issue. \gls{dsms} allow users to apply SQL-like queries to potentially unbounded streams of data in a vein similar to \gls{dbms}. However, a major difference arises from the continuous nature of processed data: while in traditional \gls{dbms} a finite amount of data is stored persistently and can be accessed anytime, data streams are potentially unbounded and not persistent. This entails that instead of applying an incoming query to existing data, incoming data is applied to an existing query. Queries are treated as continuous (or standing) and update their results based on incoming data. 
+Aggregation operators can only work if some form of windowing is applied to the stream (e.g. a sliding window of the last 10 data items received).
 
-Complex Event Processing (CEP) is a term used for a technique that allows more involved analysis of event streams. The goal is to extract higher-level information from a stream of lower-level events by declaratively specifying events of interest through event patterns, often expressed in a query language. This allows the detection of events representing situations of interest that demand a reaction. As an example, an event pattern correlates incoming 'Smoke Particle Detected' events from a smoke particle sensor with aggregated 'Temperature' events if the average temperature of the last 30 seconds exceeded 60 degrees Celsius. If the CEP system detects a series of events from sensors in close proximity to location X that matches this pattern, it creates a complex event 'Fire in location X detected' and emits it to the interested parties (e.g. building monitoring system). 
+
+
+The second approach is called \gls{cep} and can be seen as an extension to the content- or topic-based publish-subscribe paradigm \cite{Cugola2012}, as it allows subscriptions to refer not only to single events, but to events created through the combination of lower-level events.
+
+\gls{cep} allows more involved analysis of event streams. The goal is to extract higher-level information from a stream of lower-level events by declaratively specifying events of interest through event patterns, often expressed in a query language. This allows the detection of events representing situations of interest that demand a reaction. As an example, an event pattern correlates incoming 'Smoke Particle Detected' events from a smoke particle sensor with aggregated 'Temperature' events if the average temperature of the last 30 seconds exceeded 50 degrees Celsius. If the \gls{cep} system detects a series of events from sensors in close proximity to location X that matches this pattern, it creates a complex event 'Fire in location X detected' and emits it to the interested parties (e.g. building monitoring system). 
 
 \%TODO explain relation to Data Stream Processing / Event processing \\ \\
-% different origins of cep and eps, terms converged over time; focus of esp: bulk stream data processing, cep: event pattern detection, causal dependencies -> find only the few relevant events in the stream
-While ESP systems rely mostly on aggregation operations, CEP systems traditionally focus more on detecting temporal and causal correlations in order to abstract to a higher level of information. However, more recent approaches have 
+% different origins of \gls{cep} and eps, terms converged over time; focus of \gls{esp}: bulk stream data processing, \gls{cep}: event pattern detection, causal dependencies -> find only the few relevant events in the stream
+While \gls{esp} systems rely mostly on aggregation operations, \gls{cep} systems traditionally focus more on detecting temporal and causal correlations in order to abstract to a higher level of information \cite{Cugola2012}. 
+%However, more recent approaches have 
 
 \% definition of.... events, producers, consumers \\
 
 \% event definition \\ 
-An \textit{event} can be defined as anything that happens \cite{Chandy2011}, or more precisely, any meaningful change of state in the universe of an application that can be perceived through some kind of (physical or virtual) sensor. Depending on the application, a mere change in time can be an event, so any ordered sequence of data generated by a source like a light sensor can be interpreted as an \textit{event stream}. To be precise, when we use the term \textit{event} we actually mean a \textit{notification about an event}, not the event itself that caused the change of state. This \textit{event notification} is a message that contains one or more attribute-value fields and usually has a timestamp and a type.
+An \textit{event} can be defined as anything that happens \cite{Chandy2011}, or more precisely, any meaningful change of state in the universe of an application that can be perceived through some kind of (physical or virtual) sensor. Depending on the application, a mere change in time can be an event, so any ordered sequence of data generated by a source like a light sensor can be interpreted as an \textit{event stream} (to be precise, when we use the term \textit{event} we actually mean a \textit{notification about an event}, not the event itself that caused the change of state). This \textit{event notification} is a message that contains one or more attribute-value fields and usually has a time stamp and a type.
 Data sources (producers) generate streams of data in the form of simple events (e.g. sensor readings) which can be processed using operators which combined and correlate them with other events and domain knowledge to create complex events. Complex events in turn can serve as further input for other operators.
-Interested parties (consumers) can subscribe to events of interest to them. These events of interest are represented by complex events and can be defined through queries consisting of aggregation, composition and derivation operators, which in turn are executed on event streams by the CEP system.
+Interested parties (consumers) can subscribe to events of interest to them. These events of interest are represented by complex events and can be defined through queries consisting of aggregation, composition and derivation operators, which in turn are executed on event streams by the \gls{cep} system.
 
-This declarative approach to retrieving information is similar to traditional Database Management Systems (DBMS), hence the Query languages used in CEP and Data Stream Processing (DSP) in general are structurally very similar. 
+This declarative approach to retrieving information is similar to traditional Database Management Systems (DBMS), hence the Query languages used in \gls{cep} and Data Stream Processing (DSP) in general are structurally very similar. 
 
-\%TODO possibly give example of SQL vs CQL or AdaptiveCEP query \\
+\%TODO possibly give example of Adaptive\gls{cep} query \\
 
-However, a major difference arises from the continuous nature of data processed in DSP and CEP applications: while in traditional DBMS a finite amount of data is stored persistently and can be accessed anytime, data streams are not persistent and potentially unbounded. This entails that instead of applying a new query to existing data, new data is applied to an existing query. 
-Furthermore aggregation operators can only work if some form of windowing is applied to the stream (e.g. a sliding window of the last 10 events received).
+
 
 \%types of operators in more detail \\
 Queries - sometimes also referred to as event patterns \cite{Luckham2011a} or event definition rules \cite{Cugola2013} - consist of one or more operators. These can be categorized as follows:
@@ -134,9 +137,9 @@ The event processing system is responsible for the processing of incoming events
 This allows for timely reaction to new information by the consumers, enabling a range of real-time, reactive applications.
 
 \% short summary of possible applications \\
-\% applications (supply chain managment, healthcare, transportation, manufacturing, financial trading) and their requirements, scaling issues (-> link to distributed processing)
+\% applications (supply chain management, healthcare, transportation, manufacturing, financial trading) and their requirements, scaling issues (-> link to distributed processing)
 
-CEP systems have various applications, among them the  domains of intrusion detection systems, credit card fraud detection, stock market trading, business intelligence, network monitoring, traffic monitoring, healthcare, transportation, supply chains and manufacturing. Due to the nature of some of these domains, event sources can be numerous and widely distributed, making CEP systems that rely on central processing susceptible to scaling issues. This calls for a distributed computing approach, which exists in the form of Distributed CEP.
+\gls{cep} systems have various applications, among them the  domains of intrusion detection systems, credit card fraud detection, stock market trading, business intelligence, network monitoring, traffic monitoring, healthcare, transportation, supply chains and manufacturing. Due to the nature of some of these domains, event sources can be numerous and widely distributed, making \gls{cep} systems that rely on central processing susceptible to scaling issues. This calls for a distributed computing approach, which exists in the form of Distributed \gls{cep}.
 
 \subsection{Distributed Complex Event Processing}
 %queries, operator graphs
@@ -144,18 +147,18 @@ CEP systems have various applications, among them the  domains of intrusion dete
 %relation to traditional databases and DSMS/EPS (=EBS?) which cannot detect sequences and ordering relations
 %time and space decoupling of producer and consumer?
 
-%distributed cep
-These operators can either be centrally processed, or their processing can be distributed over an overlay network of several independent processing nodes (hosts). Distributed processing makes CEP systems much more scalable: events do not incur additional producer-to-consumer latency from being routed to a central processing unit, network traffic is decreased because unnecessary events can be filtered on hosts closer to their sources, and operators can be replicated onto multiple hosts in case of high data rates and/or limited processing capabilities of hosts.
+%distributed \gls{cep}
+These operators can either be centrally processed, or their processing can be distributed over an overlay network of several independent processing nodes (hosts). Distributed processing makes \gls{cep} systems much more scalable: events do not incur additional producer-to-consumer latency from being routed to a central processing unit, network traffic is decreased because unnecessary events can be filtered on hosts closer to their sources, and operators can be replicated onto multiple hosts in case of high data rates and/or limited processing capabilities of hosts.
 
 
 
-\subsection{Adaptation mechanisms in CEP}
+\subsection{Adaptation mechanisms in \gls{cep}}
 \%placement algorithms \\
 \%purpose, assumptions, optimization goals, central vs decentral, task assignment problem NP-hard
 
 \% TODO rework, taken from old intro \\
 %TODO terminology: placement algorithm/mechanism
-Placement algorithms are utilized to find and maintain a mapping of the queries submitted to a CEP system to the network of processing nodes which is optimal w.r.t. some non-functional property (such as latency, bandwidth, load or combinations thereof).
+Placement algorithms are utilized to find and maintain a mapping of the queries submitted to a \gls{cep} system to the network of processing nodes which is optimal w.r.t. some non-functional property (such as latency, bandwidth, load or combinations thereof).
  Every placement algorithm attempts to optimize one or more non-functional properties and is designed  for specific situations characterised by network conditions like traffic type (bursty or uniform), network topology (distributed or clustered), and stability of connections and queries. 
 
 %(in the form of a logical flow graph consisting of sources, operators and drains) 
@@ -173,30 +176,30 @@ hence placement algorithms use some heuristic function that is minimized/maximiz
 
 Placement algorithms can work in a centralized or distributed fashion, meaning that they have either information on the state of the entire network, allowing them to find globally optimal placements, or are restricted to local information from the node they are executed on and its neighbours, allowing them to make locally optimal placement decisions. Centralized algorithms tend to find globally better placements, but are restricted in their scalability due to the amount and frequency of necessary information exchange. 
 
-Most mechanisms periodically re-evaluate the current placement to check if it is still optimal or needs to be adjusted. While periodic re-evaluation of the placement enables the system to react to changes in the underlying network to a certain degree, there is currently no way to automatically adapt the utilized placement algorithm to major changes in the environment (context) that adversely affect the QoS demands.
-If any part of the network or application context (e.g. network conditions, network topology, type of QoS demands on queries, event frequency) is changed significantly, the placement algorithm that was used before may no longer be optimal as it was intended for a different context.
+Most mechanisms periodically re-evaluate the current placement to check if it is still optimal or needs to be adjusted. While periodic re-evaluation of the placement enables the system to react to changes in the underlying network to a certain degree, there is currently no way to automatically adapt the utilized placement algorithm to major changes in the environment (context) that adversely affect the \gls{qos} demands.
+If any part of the network or application context (e.g. network conditions, network topology, type of \gls{qos} demands on queries, event frequency) is changed significantly, the placement algorithm that was used before may no longer be optimal as it was intended for a different context.
 The choice of the most fitting placement algorithm for the current context is crucial for system performance. 
 
 The placement of the operators cannot happen in an arbitrary way: some operators require a minimum of processing power or specific hardware; it is further constrained by sequential dependencies between operators: if an operator combines several simple or complex events, the operators that process these events need to be placed on processing nodes located upstream (viewed from the drain) of this operator's processing node, so this can reduce the number of feasible solutions. 
 
-Further mechanisms to satisfy QoS demands involve the optimization of the operator graph as well as parallelization by replication of operators.
+Further mechanisms to satisfy \gls{qos} demands involve the optimization of the operator graph as well as parallelization by replication of operators.
 
-The choice of the appropriate strategy and its mechanisms depends on both the network conditions and the QoS demands imposed on the queries by users. As both can change over time, some form of context awareness and adaptability is necessary to guarantee a steady level of system performance.
+The choice of the appropriate strategy and its mechanisms depends on both the network conditions and the \gls{qos} demands imposed on the queries by users. As both can change over time, some form of context awareness and adaptability is necessary to guarantee a steady level of system performance.
 
 
 %=====================================================
-\subsection{Quality of Service in CEP}
+\subsection{Quality of Service in \gls{cep}}
 
-%TODO introduce AdaptiveCEP here or in related work? \\
-%As some applications have specific requirements regarding the network conditions to function as intended, AdaptiveCEP offers the possibility to include QoS demands with every query. These QoS demands, e.g. end-to-end latency < x or bandwidth > y, are used to ensure that every host between source and drain involved in the processing of a query helps satisfying these requirements. 
+%TODO introduce Adaptive\gls{cep} here or in related work? \\
+%As some applications have specific requirements regarding the network conditions to function as intended, Adaptive\gls{cep} offers the possibility to include \gls{qos} demands with every query. These \gls{qos} demands, e.g. end-to-end latency < x or bandwidth > y, are used to ensure that every host between source and drain involved in the processing of a query helps satisfying these requirements. 
 
 
 \%TODO re-use and re-write partly if possible
-\%==== from OLD QOS+placement introduction, related work(placement) ====\\
+\%==== from OLD \gls{qos}+placement introduction, related work(placement) ====\\
 This becomes even more important in a scenario with geographically spread out producers and consumers where a certain end-to-end latency must not be exceeded. In this case it is not possible to route all events to a central processing node as it will likely cause the latency limit to be exceeded. Therefore the computations involved in processing a query need to be distributed across several nodes.
 
-Placement algorithms handle the placement of the individual operators on hosts and try to optimize one or more QoS metrics in doing so and are periodically re-evaluated to check if the placement is still optimal or needs to be adjusted. 
-These QoS metrics can be, among others: 
+Placement algorithms handle the placement of the individual operators on hosts and try to optimize one or more \gls{qos} metrics in doing so and are periodically re-evaluated to check if the placement is still optimal or needs to be adjusted. 
+These \gls{qos} metrics can be, among others: 
 \begin{itemize}
 \item latency 
 \item bandwidth consumption
@@ -209,24 +212,20 @@ These QoS metrics can be, among others:
 Currently, most operator placement algorithms used in practice focus on optimizing latency and/or load balancing. 
 
 
-\section{Context Models}
 
-%
-\subsection{Types of Context Models}
-\% different types of models and their pros and cons (-> justification of FM choice?), properties
-\subsection{Dynamic Software Product Lines and Feature Models}
+\section{Dynamic Software Product Lines and Feature Models}
 \% introduction with a small example \\
 \% terms and definitions, FODA notation \\
 \% relevance of context-awareness to enable adaptability of systems \\
 \% introduction to self-adaptive systems that profit from mechanism transitions, (examples in related work?)
 
-\subsection{Context Feature Models} 
+\subsection{Context-Aware Feature Models} 
 \% may be moved to related work as it is best explained in context of other work and is directly relevant to the thesis
-\section{Machine Learning}
-\% depending on type of the actual technique used \\
-\% explanation of general principle, examples of application
-\subsection{Regression Learning}
-\subsection{Classification}
+%\section{Machine Learning}
+% depending on type of the actual technique used \\
+% explanation of general principle, examples of application
+%\subsection{Regression Learning}
+%\subsection{Classification}
 
 \section{Summary}
 
@@ -267,7 +266,7 @@ Freudenreich explicitly differentiates between situation context (information ab
 \item multi-context modeling
 \end{itemize}
 \end{itemize}
-After identifying these requirements, he argues that there is a need for relationship representation and basic reasoning, but ontology-based models, which provide elaborate context reasoning, are considered to be too detrimental to EBS performance. Therefore he proposes an ontology-based metamodel that can represent domain concepts in terms of concepts, attributes and relationships which allows for context construction to happen at runtime, while the context information structure is determined at design time. The metamodel makes no assumptions about the domain model's data types or structure, making it very flexible. Situations and reactions to them can be specified declaratively as policies using the defined ontology.
+After identifying these requirements, he argues that there is a need for relationship representation and basic reasoning, but ontology-based models, which provide elaborate context reasoning, are considered to be too detrimental to EBS performance. Therefore he proposes an ontology-based metamodel that can represent domain con\gls{cep}ts in terms of con\gls{cep}ts, attributes and relationships which allows for context construction to happen at runtime, while the context information structure is determined at design time. The metamodel makes no assumptions about the domain model's data types or structure, making it very flexible. Situations and reactions to them can be specified declaratively as policies using the defined ontology.
 
 E.Barrenchea et al. propose to embed context information directly into events as a first class element. Components can specify the context of their publications and/or subscriptions. Components can be grouped into contextual environments ( making them "siblings") that share the same context parameters and values. Context awareness is realized by context filters in an environment middleware layer that filter according to the specified event schema and the environment they are part of, which relieves components of keeping track of context information directly. This moves context away from the component logic and towards the layer of the pub/sub scheme.  An environment manager handles context updates and provides an interface to the application layer for utilizing  context information.
 
@@ -286,7 +285,7 @@ Saller et al. aim to enrich feature models with context information and context 
 Weckesser et al. propose an approach that extends the expressiveness of feature models as well as the possibilities to validate them. It allows for modeling  of feature attribute types and constraints beyond boolean as well as UML-like multiplicities of features. Furthermore, they enable automated validation of such cardinality-based feature models through methods that check the constraints imposed on the feature model by cardinality annotations. This is useful when dealing with systems that have multiple instances of a feature and need to take dependencies among them (and their number) and other features into account.
 
 \section{Adaptation and Context-Awareness for EBS}
-\% AdaptiveCEP paper\\ \\
+\% Adaptive\gls{cep} paper\\ \\
 \% Lakshmanan placement algorithm classification \\
 %TODO include relevant parts
 The work of G. Lakshmanan et al. \cite{Lakshmanan2008} is a survey of 8 algorithms developed to solve the problem of optimal operator placement in data stream processing systems. To compare the different approaches, the authors define a set of core components that significantly affect the performance of the system and compare the categories of these components: 
@@ -299,7 +298,7 @@ The work of G. Lakshmanan et al. \cite{Lakshmanan2008} is a survey of 8 algorith
 \item reconfiguration (triggers for operator migration: thresholds, periodic re-evaluation, constraint violation)
 \end{itemize}
 
-Based on these components, 8 placement algorithms developed respectively by Pietzuch, Balazinska, Abadi, Zhou, Kumar, Ahmad, Amini and Pandit are assigned to the discussed categories. The authors then proceed by comparing the algorithms w.r.t. their design decisions and underlying assumptions. It is concluded that decentralized approaches which are able to adapt dynamically by operator migration are prevalent, with latency and, by extension, load balancing being the preferred metrics to optimize. 
+Based on these components, 8 placement algorithms developed r\gls{esp}ectively by Pietzuch, Balazinska, Abadi, Zhou, Kumar, Ahmad, Amini and Pandit are assigned to the discussed categories. The authors then proceed by comparing the algorithms w.r.t. their design decisions and underlying assumptions. It is concluded that decentralized approaches which are able to adapt dynamically by operator migration are prevalent, with latency and, by extension, load balancing being the preferred metrics to optimize. 
 Based on the comparison of the assumptions a decision tree for selecting a fitting placement algorithm considering the characteristics of a given problem (node distribution, number of administrative domains, dynamics of topology and data, query diversity) is proposed.
 
 
@@ -310,14 +309,14 @@ Based on the comparison of the assumptions a decision tree for selecting a fitti
 SPLConqueror is a collection of programs and a library for discovering the influence of configuration options of software with variable elements on non-functional properties. This is done iteratively by using linear regression learning and stepwise feature selection. It consists of four programs: 
 \begin{itemize}
 \item VariabilityModelGUI: creation and editing of variability models of the configurable system; allows for exclude/require constraints between elements
-\item PerformancePredictionGUI: learning an influence model from a given variability model and a set of measurements (of configurations and their performance regarding one metric). Possible configuration options for sampling and linear regression algorithm are available. The result is a an influence model of terms of weighted influences on one specific performance metric in the following form: (w1*c1 + w2*c2 + ... w34*c3*c4) where w34*c3*c4 denotes the selection of both configuration options c3 and c4
+\item Performan\gls{cep}redictionGUI: learning an influence model from a given variability model and a set of measurements (of configurations and their performance regarding one metric). Possible configuration options for sampling and linear regression algorithm are available. The result is a an influence model of terms of weighted influences on one specific performance metric in the following form: (w1*c1 + w2*c2 + ... w34*c3*c4) where w34*c3*c4 denotes the selection of both configuration options c3 and c4
 \item SPLConquerorGUI: GUI for visualization and analysis of the learned model with options for filtering variables and adjustment of the model. Visualization of influences and detected dependencies
 \item CommandLine: allows for specification and execution of experimental setups with different sampling and machine learning options
 \end{itemize}
  Further submodules include MachineLearning (algorithm for learning performance-influence model; interface for SAT checking of configurations w.r.t variability model and optimization of configuration for a given non-functional property and objective function) and PyML (interface to scikitlearn (a python ML framework), different regression learning techniques).
  
- Application to AdaptiveCEP: 
- 1. determine from measurements for every mechanism (context (network conditions) -> performance (w.r.t. mechanism's optimized QoS metric?)) the influence of every context element on the performance metric by using linear regression; -> need to restrict combinations of context features + mechanisms to valid ones to limit necessary training/measurement data 
+ Application to Adaptive\gls{cep}: 
+ 1. determine from measurements for every mechanism (context (network conditions) -> performance (w.r.t. mechanism's optimized \gls{qos} metric?)) the influence of every context element on the performance metric by using linear regression; -> need to restrict combinations of context features + mechanisms to valid ones to limit necessary training/measurement data 
  2. the resulting formula (with weights for the influence of each context feature) can predict the performance of every context feature configuration for each mechanism 
  3. with this, calculate the predicted performance of every mechanism for a given context configuration
  4. compare the performance predictions of the different mechanisms for a given context configuration; problem: how to compare performance measured in different metrics? Can it be reasonably normalized to [0,1], if yes, what lower/upper bounds to choose for latency, bandwidth, ... to make them comparable?
@@ -328,7 +327,7 @@ SPLConqueror is a collection of programs and a library for discovering the influ
 \chapter{Context-aware Feature Model and Mechanism Transition Approach}
 
 %Design
-\% This chapter should describe the design of the own approach on a conceptional level without mentioning the implementation details. The section should have a length of about five pages
+\% This chapter should describe the design of the own approach on a con\gls{cep}tional level without mentioning the implementation details. The section should have a length of about five pages
 % 1. Requirements + Assumptions 2.System Overview 2.1 Component A, 2.2 ..., 3. Summary
 
 \% in detail: problem analysis, identification of important issues, describe and explain proposed solution, identify remaining issues
@@ -339,11 +338,11 @@ SPLConqueror is a collection of programs and a library for discovering the influ
 
 \section{Context Feature Model Design}
 \subsection{Requirement Analysis}
-In the case of AdaptiveCEP, the system should be able to detect the conditions of the network that hosts the operators of its queries. In order to ensure the compliance with any QoS demands placed on the queries, it should then be able to dynamically choose appropriate mechanisms (operator placement strategy, ...) that fulfill the demands and optimize their relevant QoS metrics even if the network conditions change. 
+In the case of Adaptive\gls{cep}, the system should be able to detect the conditions of the network that hosts the operators of its queries. In order to ensure the compliance with any \gls{qos} demands placed on the queries, it should then be able to dynamically choose appropriate mechanisms (operator placement strategy, ...) that fulfill the demands and optimize their relevant \gls{qos} metrics even if the network conditions change. 
 To do this, the application needs knowledge about the status of any nodes currently hosting operators (to detect performance deterioration) as well as alternative nodes currently unoccupied (for possible reconfiguration).
 Some of this information could be abstracted into coarser categories to facilitate decision making.
 Furthermore, it should be able to cope with joining and leaving hosts. 
-The adaptability of the application is given by the different strategies therefore it should be possible to include new strategies, possibly with new types of QoS metrics. Useful dimensions of network status information are, among others: latency, bandwidth, utilization, throughput, location/velocity (in case of mobile network entities), energy consumption.
+The adaptability of the application is given by the different strategies therefore it should be possible to include new strategies, possibly with new types of \gls{qos} metrics. Useful dimensions of network status information are, among others: latency, bandwidth, utilization, throughput, location/velocity (in case of mobile network entities), energy consumption.
 
 %Context Model Requirements
 To capture the requirements of the context model in a structured manner, the analysis framework proposed by Bolchini et al. is used. This categorizes the requirements as follows: \\
@@ -363,7 +362,7 @@ context history (does the current context state depend on previous ones)  & uncl
 \hline 
 subject (what is the point of view -> user or app perspective) & app centric, system needs context information to optimize strategy usage \\ 
 \hline 
-user profiles (are user preferences relevant for the context, how are they represented) & Qos demands can be viewed as user preferences \\ 
+user profiles (are user preferences relevant for the context, how are they represented) & \gls{qos} demands can be viewed as user preferences \\ 
 \hline 
 \end{tabularx} 
 
@@ -380,7 +379,7 @@ flexibility (domain specific vs general)  & specific to application, with enough
 \hline 
 variable context granularity (ability to represent context at different levels of detail) & - \\ 
 \hline 
-valid context constraints (can the number of possible contexts be restricted by semantic constraints) & necessary to restrict space of system configurations; inherent to CFM \\ 
+valid context constraints (can the number of possible contexts be restricted by semantic constraints) & necessary to restrict space of system configurations; inherent to \gls{cfm} \\ 
 \hline 
 \end{tabularx} 
  
@@ -406,19 +405,19 @@ Note: will split graph in system and context part for better readability
 
 The model limits itself to those elements of the system that are relevant for the detection of or reaction to network environment changes.
 The graph modeling technique used to represent the context model as a feature model was first used in the domain of Software Product Lines (SPL) and allows definition of variable parts (features) of both system and context. At runtime, the active features constitute the configuration of the system/context; the space of possible configurations is restricted by constraints between features (xor-, or groups, require- and exclude relations). This allows the restriction of the model to valid configurations, which is helpful when gathering measurement data for different possible configurations. 
-The main elements of the context are the queries executed by the system, their QoS metrics, the QoS demands placed upon them, and a set of situations that characterize the network conditions of the nodes in the system. These situations abstract from measurements on single hosts to the overall state of the queries' environment, and can be used in the definition of constraints and adaptation rules. Their mutually exclusive subcategories (like dynamic, uniform) can be defined by threshold values (in some relation to QoS demands on operators) and can be defined more finely granular if necessary. Note that multiple Situations can be active at the same time.
-The variable parts of the System are the ones that can be directly reconfigured: the placement mechanisms, each optimizing a set of QoS metrics and suited to a certain situation. Although they can not be directly reconfigured, the Hosts/Nodes are an integral part of the system, so they are included on this side of the model. Every Host in the System has a set of associated QoS measurements.
+The main elements of the context are the queries executed by the system, their \gls{qos} metrics, the \gls{qos} demands placed upon them, and a set of situations that characterize the network conditions of the nodes in the system. These situations abstract from measurements on single hosts to the overall state of the queries' environment, and can be used in the definition of constraints and adaptation rules. Their mutually exclusive subcategories (like dynamic, uniform) can be defined by threshold values (in some relation to \gls{qos} demands on operators) and can be defined more finely granular if necessary. Note that multiple Situations can be active at the same time.
+The variable parts of the System are the ones that can be directly reconfigured: the placement mechanisms, each optimizing a set of \gls{qos} metrics and suited to a certain situation. Although they can not be directly reconfigured, the Hosts/Nodes are an integral part of the system, so they are included on this side of the model. Every Host in the System has a set of associated \gls{qos} measurements.
 For the sake of readability, constraints among the features of the model can as well be noted separately as follows: 
 \newline
 \begin{center}
- (C1) Situation:data rate:burst \textbf{and} Situation:node location:clustered \textbf{and} Query:QoS demand: e2e latency < X \textbf{requires} placement:Xing\\
+ (C1) Situation:data rate:burst \textbf{and} Situation:node location:clustered \textbf{and} Query:\gls{qos} demand: e2e latency < X \textbf{requires} placement:Xing\\
  
  \end{center} 
 with Xing being a placement strategy that aims to minimize the latency.
 Adaptations from one strategy to another could be triggered in a similar manner:
 
 \begin{center}
-(A1) Query:QoS demand:latency \textbf{and} Query QoS:path latency:high \textbf{implies} other latency optimizing strategy\\
+(A1) Query:\gls{qos} demand:latency \textbf{and} Query \gls{qos}:path latency:high \textbf{implies} other latency optimizing strategy\\
 
 \end{center}
 
@@ -456,7 +455,7 @@ Preliminary Implementation Considerations:
 
 \%This chapter should describe how the evaluation of the implemented mechanism was done.
 \%1. Which evaluation method is used and why? Simulations, prototype?
-\%2. What is the goal of the evaluation? Comparison? Proof of concept?
+\%2. What is the goal of the evaluation? Comparison? Proof of con\gls{cep}t?
 \%3. Wich metrics are used for characterizing the performance, costs, fairness, and efficiency of the system?
 \%4. What are the parameter settings used in the evaluation and why? If possible always justify why a certain threshold has been chose for a particular parameter.
 \%5. What is the outcome of the evaluation?

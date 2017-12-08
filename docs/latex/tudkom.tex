@@ -34,6 +34,9 @@
 \usepackage[american,ngerman]{babel}
 \usepackage{xspace}
 \usepackage[fleqn]{amsmath} % math environments and more by the AMS 
+\usepackage{hyperref}
+\usepackage[toc]{glossaries}
+	\makeglossaries
 \newcounter{dummy} % necessary for correct hyperlinks (to index, bib, etc.)
 \newcommand{\myfloatalign}{\centering} % how all the floats will be aligned
 
@@ -157,9 +160,10 @@
 	\noindent Darmstadt, den \komSubmissionDate\hfill \komName
 	
 	\tableofcontents
-	%\listoffigures
-	%\listoftables
-	
+	\listoffigures
+	\listoftables
+	\input{glossary}
+	\printglossaries
 	%======================================================
 	% The main matter (insert your contents here)
 	%======================================================
