@@ -34,9 +34,7 @@
 \usepackage[american,ngerman]{babel}
 \usepackage{xspace}
 \usepackage[fleqn]{amsmath} % math environments and more by the AMS 
-\usepackage{hyperref}
-\usepackage[toc]{glossaries}
-	\makeglossaries
+
 \newcounter{dummy} % necessary for correct hyperlinks (to index, bib, etc.)
 \newcommand{\myfloatalign}{\centering} % how all the floats will be aligned
 
@@ -96,6 +94,9 @@
     pdfproducer={}%
 }
 
+%acronym package, load after hyperref package
+\usepackage[toc, acronym, nopostdot, nonumberlist]{glossaries}
+\makeglossaries
 %============================================
 % Setup of the title page (do not change)
 %============================================
@@ -161,9 +162,7 @@
 	
 	\tableofcontents
 	\listoffigures
-	\listoftables
-	\input{glossary}
-	\printglossaries
+	\listoftables 
 	%======================================================
 	% The main matter (insert your contents here)
 	%======================================================
@@ -176,6 +175,11 @@
 	%======================================================
 	%\cleardoublepage
 	\refstepcounter{dummy}
+	
+	
+	\input{glossary}
+	\printglossaries
+		
 	\addcontentsline{toc}{chapter}{\bibname}
 	\bibliographystyle{plainnat} % <--- layout of the bib
 	\bibliography{library} % file name of your bib
