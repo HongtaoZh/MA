@@ -177,12 +177,12 @@ Summarizing, for the calculation of an operator placement the following pieces o
 \end{itemize}
 
 
-%rename to Other adaptation mechanisms?
+%other adaptation mechanisms
 \subsection{Adaptation mechanisms in CEP}
 %purpose of adaptation mechanisms
 Since the environment a \gls{cep} system is operating in can vary, it needs mechanisms that let it adapt to different circumstances (contexts). The links of the network connecting the processing nodes as well as the state of nodes themselves may change; links may get congested or break down, nodes may fail or have changing load levels.
 To account for this network context variability, operator placement algorithms of \gls{CEP} systems compute the initial deployment of the operator graph onto its hosts based on measurements of non-functional properties gathered from the available processing nodes. 
-To ensure that the placement remains optimal during run-time, an adaptation strategy may monitor changes in the \gls{qos} measurements and can periodically re-evaluate the current placement. It can then decide to adapt the placement through migration of single operators onto new hosts if expected performance gains exceed the estimated impact of the migration process.
+To ensure that the placement remains optimal during run-time, an adaptation strategy may monitor changes in the \gls{qos} measurements and can periodically re-evaluate the current placement. It can then decide to adapt the placement through migration of single operators onto new hosts, though this might be limited to cases where expected performance gains exceed the estimated impact of the migration process to avoid constant oscillation of an operator between two hosts that would negatively affect performance.
 
 % static placement algorithms -> motivation for thesis topic; adaptation of adaptation mechanisms
 While periodic re-evaluation of the placement enables the system to react to changes in the underlying network to a certain degree, there is currently no way to automatically adapt the utilized placement algorithm or other mechanisms to major changes in the context that adversely affect the \gls{qos} demands of users. If any part of the network or application context (e.g. network conditions, network topology, type of \gls{qos} demands on queries, event frequency) is changed significantly, the adaptation mechanisms (e.g. placement algorithm) that was used before may no longer be optimal as it was intended for a different context. To guarantee a steady level of system performance and the observance of \gls{qos} demands imposed on the queries by users (if supported by the \gls{cep} system), some form of context awareness and adaptability of the system is necessary to make transitions between different mechanisms possible.
@@ -196,8 +196,24 @@ Further mechanisms to keep \gls{qos} demands satisfied involve the optimization 
 \% relevance of context-awareness to enable adaptability of systems \\
 \% introduction to self-adaptive systems that profit from mechanism transitions, (examples in related work?)
 
+%introduction: past(new software variant for every new product) -> near past SPLs and present DSPLs, re-use of modularized software, individual products derived from spl
+%steps in dspl engineering: domain analysis, variation points, domain modeling (-> FM), architecture modeling
+%feature models(formalism for specifying commonality and variability among members of a family of a SPL)
+% definition of feature (1 system property during domain engineering, 2 product configuration parameter during application engineering for deriving specific variants)
+% product configuration of an spl gained by binding all variability
+% FODA notation with an example (mock example of adaptivecep?), groups, constraints
+%constraints -> model validation, valid configuration specification through FMs, restriction of valid configuration space
+%dspls variability specified at design time
+%runtime adaptability through dspls -> context information to trigger adaptations of the FM -> context-aware feature models CFMs, context-aware reconfiguration planning in saller2013
+
 \subsection{Context-Aware Feature Models} 
 \% may be moved to related work as it is best explained in context of other work and is directly relevant to the thesis
+%"extension of dspl variability specification given by a context model with requirements imposed by the context environment"
+%model system and context separately (acher)
+% specify requirements of run-time contexts via cross-tree constraints between context and system -> provide preplanning and execution of product reconfigurations at runtime
+
+
+
 %\section{Machine Learning}
 % depending on type of the actual technique used \\
 % explanation of general principle, examples of application
@@ -255,7 +271,7 @@ The framework consists of a context manager (blackboard, delivers context inform
 
 Some authors propose using feature models, which have their origins in the domain of highly configurable software product lines (SPL), as a means to model the variability and behaviour of context-aware systems.
 
-M.Archer et al. suggest using two separate feature models: one for the system and its variable parts, and one for the context, each of them with its own constraints (e.g. require, exclude). This allows for a homogeneous representation of system and context and the relationships between the two. The two models are then linked together by dependency constraints which represent the adaptation behaviour. The adaptation of the system happens based on event-condition-action (ECA) rules, with elements of the context feature model as condition and a re-configuration of the system feature model as the action part. The authors mention optimization of a utility function as an alternative to ECA-rules for modeling adaptive behaviour, which would require the feature model to be extended with attributes for information needed for the optimization.
+M.Acher et al. \cite{Acher2009} suggest using two separate feature models: one for the system and its variable parts, and one for the context, each of them with its own constraints (e.g. require, exclude). This allows for a homogeneous representation of system and context and the relationships between the two. The two models are then linked together by dependency constraints which represent the adaptation behaviour. The adaptation of the system happens based on event-condition-action (ECA) rules, with elements of the context feature model as condition and a re-configuration of the system feature model as the action part. The authors mention optimization of a utility function as an alternative to ECA-rules for modeling adaptive behaviour, which would require the feature model to be extended with attributes for information needed for the optimization.
 
 Saller et al. aim to enrich feature models with context information and context constraints in order to limit the set of valid configurations further. This is done to limit the complexity of re-configuration planning and enable such calculations on resource-constrained devices. Reconfiguration is modeled and pre-planned in the form of a transition system, with transitions from one valid system configuration into the next, based on context. To further reduce the amount of possible transitions, states with different configurations that satisfy the same constraints are considered to be identical in terms of transitions (incomplete state space). This model allows for multiple contexts to be active at once.
 
