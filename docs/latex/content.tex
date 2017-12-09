@@ -130,26 +130,45 @@ As an example, an event pattern correlates incoming 'Smoke Particle Detected' ev
 % explain relation to Data Stream Processing / Event processing \\ \\
 % different origins of \gls{cep} and eps, terms converged over time; focus of \gls{esp}: bulk stream data processing, \gls{cep}: event pattern detection, causal dependencies -> find only the few relevant events in the stream
 % distributed processing of cep and esp/dsms -> both relevant for thesis because operator placement is a problem for both
-While \gls{dsms} systems rely mostly on aggregation operations to perform bulk data processing, \gls{cep} systems traditionally focus more on detecting temporal and causal correlations in order to abstract to a higher level of information \cite{Cugola2012}. Since both can be operated on a network of processing nodes, both need operator placement algorithms (which will be introduced in the next section) that are part of the mechanisms whose transitions are a focus in this work.
+While \gls{dsms} systems rely mostly on aggregation operations to perform bulk data processing, \gls{cep} systems traditionally focus more on detecting temporal and causal correlations of particular events in order to abstract to a higher level of information \cite{Cugola2012}. Since both can be operated on a network of processing nodes, both need operator placement algorithms (which will be introduced in the next section) that are part of the mechanisms whose transitions are a focus in this work. Bearing the similarities in mind, both approaches are considered here since placement algorithms from the \gls{dsms} domain may be applicable in the \gls{cep} domain as well in certain application scenarios.
 %focus on cep, but keep dsms in mind as well because of placement problem in distributed scenarios
 
-\subsection{Distributed Complex Event Processing}
+%rename to dsp and placement algorithms
+\subsection{Distributed Stream Processing and Operator Placement}
 %queries, operator graphs
 %clustered(cluster of highly connected hosts) vs networked/decentral
-The operator graph of a query can either be centrally processed, or its processing can be distributed over an overlay network of several independent processing nodes (called hosts if an operator is deployed to them). Distributed processing makes \gls{cep} systems much more scalable: events do not incur additional producer-to-consumer latency from being routed to a central processing unit, network traffic is decreased because unnecessary events can be filtered on hosts closer to their sources, and operators can be replicated onto multiple hosts in case of high data rates and/or limited processing capabilities of hosts, allowing the system to scale in and out.
+%placement algorithms \\
+%purpose, assumptions, optimization goals, central vs decentral, task assignment problem NP-hard
 
+While both \gls{dsms} and \gls{cep} systems can operate with a central processing unit, it is often beneficial to distribute the processing of data and event streams in order to increase efficiency, flexibility and scalability.   
+The individual operators of an operator graph representing a query can be mapped to several independent, interconnected processing nodes (called hosts if an operator is deployed to them), forming an overlay network. Distributed processing makes \gls{cep} systems much more scalable and efficient: events do not incur additional producer-to-consumer latency from being routed to a central processing unit, network traffic is decreased because unnecessary events can be filtered on hosts closer to their sources, and operators can be replicated onto multiple hosts in case of high data rates and/or limited processing capabilities of hosts, allowing the system to scale in and out.
 
-\subsection{Adaptation mechanisms in CEP}
-\%placement algorithms \\
-\%purpose, assumptions, optimization goals, central vs decentral, task assignment problem NP-hard
+% terminology: placement algorithm/mechanism -> placement as an adaptation mechanism
+%explanation of placement algorithms, goal, purpose, requirements
+Operator placement algorithms are utilized to find and deploy a mapping of the queries submitted to a \gls{cep} system to the network of processing nodes which is optimal w.r.t. some non-functional property.
+%NP-hard task assignment problem, heuristics
+As the operator placement problem is a specific instance of the partition problem which has been shown to be NP-hard \cite{Cardellini2016}, placement algorithms find a placement that is close to the optimal one in reasonable time through heuristics that aim to optimize one or more \gls{qos} metric(s).
+Optimizing a non-functional property such as latency is important e.g. in a scenario with geographically spread out producers and consumers where a certain end-to-end latency must not be exceeded. In this case it is not possible to route all events to a central processing node as it will likely cause the latency limit to be exceeded. Therefore the computations involved in processing a query must be distributed across nodes between producers and consumers that are connected via low-latency links and have short processing delay.
+These non-functional properties and \gls{qos} metrics can be, among others: 
+\begin{itemize}
+\item end-to-end latency 
+\item bandwidth consumption
+\item CPU load (balancing)
+\item reliability
+\item availability
+\item energy consumption
+\end{itemize}
+%TODO citations
+Currently, most operator placement algorithms focus on optimizing latency \cite{} and/or load balancing \cite{}, but other metrics like energy consumption have been adressed as well \cite{}. 
+Besides optimizing one or more \gls{qos} metric(s), every placement algorithm is designed for specific situations characterised by network conditions like traffic type (bursty or uniform), network topology (distributed or clustered), and stability of connections and queries. 
 
-\% TODO rework, taken from old intro \\
-%TODO terminology: placement algorithm/mechanism
-Placement algorithms are utilized to find and maintain a mapping of the queries submitted to a \gls{cep} system to the network of processing nodes which is optimal w.r.t. some non-functional property (such as latency, bandwidth, load or combinations thereof).
- Every placement algorithm attempts to optimize one or more non-functional properties and is designed  for specific situations characterised by network conditions like traffic type (bursty or uniform), network topology (distributed or clustered), and stability of connections and queries. 
+%central vs decentral placement decisions
+Placement algorithms can work in a centralized or distributed fashion, meaning that they have either information on the state of the entire network, allowing them to find globally optimal placements, or are restricted to local information from the node they are executed on and its neighbours, allowing them to make locally optimal placement decisions. Centralized algorithms tend to find globally better placements, but are restricted in their scalability due to the amount and frequency of necessary information exchange. 
 
-%(in the form of a logical flow graph consisting of sources, operators and drains) 
-These algorithms handle the distribution of the individual operators onto the network of processing nodes. For this several pieces of information are needed \cite{Lakshmanan2008a}:
+%dependencies in operator graphs, other constraints
+The placement of operators can be constrained: some operators may require a minimum of processing power or specific hardware; further constraints are imposed by sequential dependencies between operators: if an operator combines several simple or complex events, the operators that process these events need to be placed on processing nodes located upstream (viewed from the consumer) of this operator's processing node, so this can reduce the number of feasible solutions. 
+
+Summarizing, for the calculation of an operator placement the following pieces of information are needed \cite{Lakshmanan2008}:
 \begin{itemize}
 \item the queries to be placed, viewed as logical flow graphs consisting of event sources, operators, and drains
 \item the network of interconnected processing nodes that will host the operators of the flow graph
@@ -157,48 +176,19 @@ These algorithms handle the distribution of the individual operators onto the ne
 \item information about processing nodes' capabilities and operators' requirements that may constrain the placement
 \end{itemize}
 
-%TODO where to put this
-The operator placement problem is a specific instance of the task assignment problem which has been shown to be NP-hard, %TODO source
-hence placement algorithms use some heuristic function that is minimized/maximized to find a placement that is close to the optimal one.
 
-Placement algorithms can work in a centralized or distributed fashion, meaning that they have either information on the state of the entire network, allowing them to find globally optimal placements, or are restricted to local information from the node they are executed on and its neighbours, allowing them to make locally optimal placement decisions. Centralized algorithms tend to find globally better placements, but are restricted in their scalability due to the amount and frequency of necessary information exchange. 
+%rename to Other adaptation mechanisms?
+\subsection{Adaptation mechanisms in CEP}
+%purpose of adaptation mechanisms
+Since the environment a \gls{cep} system is operating in can vary, it needs mechanisms that let it adapt to different circumstances (contexts). The links of the network connecting the processing nodes as well as the state of nodes themselves may change; links may get congested or break down, nodes may fail or have changing load levels.
+To account for this network context variability, operator placement algorithms of \gls{CEP} systems compute the initial deployment of the operator graph onto its hosts based on measurements of non-functional properties gathered from the available processing nodes. 
+To ensure that the placement remains optimal during run-time, an adaptation strategy may monitor changes in the \gls{qos} measurements and can periodically re-evaluate the current placement. It can then decide to adapt the placement through migration of single operators onto new hosts if expected performance gains exceed the estimated impact of the migration process.
 
-Most mechanisms periodically re-evaluate the current placement to check if it is still optimal or needs to be adjusted. While periodic re-evaluation of the placement enables the system to react to changes in the underlying network to a certain degree, there is currently no way to automatically adapt the utilized placement algorithm to major changes in the environment (context) that adversely affect the \gls{qos} demands.
-If any part of the network or application context (e.g. network conditions, network topology, type of \gls{qos} demands on queries, event frequency) is changed significantly, the placement algorithm that was used before may no longer be optimal as it was intended for a different context.
-The choice of the most fitting placement algorithm for the current context is crucial for system performance. 
+% static placement algorithms -> motivation for thesis topic; adaptation of adaptation mechanisms
+While periodic re-evaluation of the placement enables the system to react to changes in the underlying network to a certain degree, there is currently no way to automatically adapt the utilized placement algorithm or other mechanisms to major changes in the context that adversely affect the \gls{qos} demands of users. If any part of the network or application context (e.g. network conditions, network topology, type of \gls{qos} demands on queries, event frequency) is changed significantly, the adaptation mechanisms (e.g. placement algorithm) that was used before may no longer be optimal as it was intended for a different context. To guarantee a steady level of system performance and the observance of \gls{qos} demands imposed on the queries by users (if supported by the \gls{cep} system), some form of context awareness and adaptability of the system is necessary to make transitions between different mechanisms possible.
 
-The placement of the operators cannot happen in an arbitrary way: some operators require a minimum of processing power or specific hardware; it is further constrained by sequential dependencies between operators: if an operator combines several simple or complex events, the operators that process these events need to be placed on processing nodes located upstream (viewed from the drain) of this operator's processing node, so this can reduce the number of feasible solutions. 
-
-Further mechanisms to satisfy \gls{qos} demands involve the optimization of the operator graph as well as parallelization by replication of operators.
-
-The choice of the appropriate strategy and its mechanisms depends on both the network conditions and the \gls{qos} demands imposed on the queries by users. As both can change over time, some form of context awareness and adaptability is necessary to guarantee a steady level of system performance.
-
-
-%=====================================================
-\subsection{Quality of Service in CEP}
-
-%TODO introduce Adaptive\gls{cep} here or in related work? \\
-%As some applications have specific requirements regarding the network conditions to function as intended, Adaptive\gls{cep} offers the possibility to include \gls{qos} demands with every query. These \gls{qos} demands, e.g. end-to-end latency < x or bandwidth > y, are used to ensure that every host between source and drain involved in the processing of a query helps satisfying these requirements. 
-
-
-\%TODO re-use and re-write partly if possible
-\%==== from OLD \gls{qos}+placement introduction, related work(placement) ====\\
-This becomes even more important in a scenario with geographically spread out producers and consumers where a certain end-to-end latency must not be exceeded. In this case it is not possible to route all events to a central processing node as it will likely cause the latency limit to be exceeded. Therefore the computations involved in processing a query need to be distributed across several nodes.
-
-Placement algorithms handle the placement of the individual operators on hosts and try to optimize one or more \gls{qos} metrics in doing so and are periodically re-evaluated to check if the placement is still optimal or needs to be adjusted. 
-These \gls{qos} metrics can be, among others: 
-\begin{itemize}
-\item latency 
-\item bandwidth consumption
-\item load balancing
-\item reliability
-\item availability
-\item energy consumption
-\end{itemize}
-
-Currently, most operator placement algorithms used in practice focus on optimizing latency and/or load balancing. 
-
-
+%other mechanisms: query optimization, replication
+Further mechanisms to keep \gls{qos} demands satisfied involve the optimization of the operator graph before its deployment to the network, as well as parallelization of processing steps by replication of the same operator onto multiple hosts to increase throughput (operator replication). It is also possible to identify parts of operator graphs that are identical for different queries and let several queries share these processing steps to avoid duplicate processing of events (operator re-use).
 
 \section{Dynamic Software Product Lines and Feature Models}
 \% introduction with a small example \\
@@ -273,6 +263,9 @@ Weckesser et al. propose an approach that extends the expressiveness of feature 
 
 \section{Adaptation and Context-Awareness for EBS}
 \% Adaptive\gls{cep} paper\\ \\
+
+%As some applications have specific requirements regarding the network conditions to function as intended, Adaptive\gls{cep} offers the possibility to include \gls{qos} demands with every query. These \gls{qos} demands, e.g. end-to-end latency < x or bandwidth > y, are used to ensure that every host between source and drain involved in the processing of a query helps satisfying these requirements. 
+
 \% Lakshmanan placement algorithm classification \\
 %TODO include relevant parts
 The work of G. Lakshmanan et al. \cite{Lakshmanan2008} is a survey of 8 algorithms developed to solve the problem of optimal operator placement in data stream processing systems. To compare the different approaches, the authors define a set of core components that significantly affect the performance of the system and compare the categories of these components: 
