@@ -191,27 +191,39 @@ While periodic re-evaluation of the placement enables the system to react to cha
 Further mechanisms to keep \gls{qos} demands satisfied involve the optimization of the operator graph before its deployment to the network, as well as parallelization of processing steps by replication of the same operator onto multiple hosts to increase throughput (operator replication). It is also possible to identify parts of operator graphs that are identical for different queries and let several queries share these processing steps to avoid duplicate processing of events (operator re-use).
 
 \section{Dynamic Software Product Lines and Feature Models}
-\% introduction with a small example \\
 \% terms and definitions, FODA notation \\
-\% relevance of context-awareness to enable adaptability of systems \\
-\% introduction to self-adaptive systems that profit from mechanism transitions, (examples in related work?)
 
 %introduction: past(new software variant for every new product) -> near past SPLs and present DSPLs, re-use of modularized software, individual products derived from spl
-%steps in dspl engineering: domain analysis, variation points, domain modeling (-> FM), architecture modeling
-%feature models(formalism for specifying commonality and variability among members of a family of a SPL)
-% definition of feature (1 system property during domain engineering, 2 product configuration parameter during application engineering for deriving specific variants)
+With the complexity and size of software systems increasing over time, approaches were envisioned that help reduce the time and effort necessary to develop a new software product. Often products similar to existing ones have to be developed that differ only in a small set of features and functions to fulfill customer-specific requirements.
+\Gls{spl} are used in Software Engineering to specify a family of software products that solve similar problems and as a consequence have a a set of commonalities and variation points. Instead of starting every product in an application domain from scratch, the parts of the software system that solve identical tasks can be re-used in every product, saving development time. 
+\Gls{spl} allow the systematic derivation of individual product variants based on the requirements imposed by a customer's application. 
 % product configuration of an spl gained by binding all variability
+An instance of a product is obtained by binding all variability captured in the \gls{spl} to a specific valid configuration of selected features.
+%TODO steps in dspl engineering: domain analysis, variation points, domain modeling (-> FM), architecture modeling
+%The task of identifying and organizing commonalities and variabilities in the form of shared data and capabilities in a domain is called \textit{Domain Analysis} \cite{Kang1990}.
+
+% definition of feature (1 system property during domain engineering, 2 product configuration parameter during application engineering for deriving specific variants)
+A feature is a distinctive user-visible system property identified during domain engineering and a product configuration parameter during application engineering \cite{Saller2013}.
+%FMs
 % FODA notation with an example (mock example of adaptivecep?), groups, constraints
 %constraints -> model validation, valid configuration specification through FMs, restriction of valid configuration space
+\textit{gls{fm}} are a formalism to represent common and variable parts of an \Gls{spl} in a tree structure and were first described in \cite{Kang1990}. They allow to define a hierarchical structure of alternative (xor, exactly one feature may be chosen) and or-groups (arbitrary choice) of features. Groups of features and individual features are either mandatory or optional. Dependencies between features from different groups can be represented as cross-tree constraints in the form of the \textit{requires} and \textit{excludes} relation. Through the tree structure and the cross-tree constraints the space of valid feature configurations is confined to those that represent actually producible software products. Thus the \gls{fm} specifies what products can be derived from the \gls{spl}.
+It is possible to use constraint solvers to check the consistency of feature configurations of possible products.
+%TODO insert example graphic + explanation here
+
 %dspls variability specified at design time
 %runtime adaptability through dspls -> context information to trigger adaptations of the FM -> context-aware feature models CFMs, context-aware reconfiguration planning in saller2013
+The more recent approach of \Gls{dspl} \cite{} allows to bind variability at run-time instead of development time. This enables the construction of context-aware systems that monitor their context and react to changes in it by adapting their configuration dynamically to the perceived context.
+%connection to context-aware systems
 
 \subsection{Context-Aware Feature Models} 
+\% relevance of context-awareness to enable adaptability of systems \\
+% introduction to self-adaptive systems that profit from mechanism transitions, (examples in related work?)
 \% may be moved to related work as it is best explained in context of other work and is directly relevant to the thesis
 %"extension of dspl variability specification given by a context model with requirements imposed by the context environment"
 %model system and context separately (acher)
 % specify requirements of run-time contexts via cross-tree constraints between context and system -> provide preplanning and execution of product reconfigurations at runtime
-
+It has been proposed \cite{Acher2009} to model system features and context features separately and connect the two models via cross tree-constraints to represent rules for dynamic reconfiguration of the system features based on changes in the context features during run-time.
 
 
 %\section{Machine Learning}
