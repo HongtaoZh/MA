@@ -23,6 +23,7 @@ Transitive CEP is a research based project based on AdaptiveCEP, the project pro
 ##Running Local simulation
 ### Mac users:
 * Run local_tcep_simulation.sh script
+
 ### Ubuntu users:
 * Run sbt one-jar command to generate the jar of the project
 * Run the following commands in new tabs
