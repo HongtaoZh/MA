@@ -203,29 +203,32 @@ A feature can be defined as a relevant system property and is used to capture co
 %FMs
 % FODA notation with an example (mock example of ...?), groups, constraints
 %constraints -> model validation, valid configuration specification through FMs, restriction of valid configuration space
-\textit{Feature models} are a formalism to represent a domain and the common and variable parts of a \gls{spl} in a tree structure and were first described in \cite{Kang1990}. They allow to define a hierarchical structure of alternative (xor, exactly one feature may be chosen), and-groups (all features are chosen) and or-groups (zero or more are chosen) of features. The choice of groups of features and individual features is either mandatory or optional. For a child feature to be selected, the parent must be selected as well, which allows the representation of hierarchical dependencies between features. Dependencies between features from different groups can be represented as cross-tree constraints in the form of the \textit{requires} (Fig.1, if Option A is selected Alternative A must be selected as well) and \textit{excludes} (Fig.1, Alternative A and Option B cannot be active at the same time) relations. Through the tree structure and the cross-tree constraints the space of valid feature configurations is confined to those that represent actually producible software products. Thus the feature model is a means to specify what products can be derived from the \gls{spl}.
+\textit{Feature models} are a formalism to represent a domain and the common and variable parts of a \gls{spl} in a tree structure. The widely used FODA notation was first described in \cite{Kang1990}. Feature models allow to define a hierarchical structure of alternative (xor, exactly one feature may be chosen), and-groups (all features are chosen) and or-groups (zero or more are chosen) of features. The choice of groups of features and individual features is either mandatory or optional. For a child feature to be selected, the parent must be selected as well, which allows the representation of hierarchical dependencies between features. Dependencies between features from different groups can be represented as cross-tree constraints in the form of the \textit{requires} (Fig.1, if Option A is selected Alternative A must be selected as well) and \textit{excludes} (Fig.1, Alternative A and Option B cannot be active at the same time) relations. Through the tree structure and the cross-tree constraints the space of valid feature configurations is confined to those that represent actually producible software products. Thus the feature model is a means to specify what products can be derived from the \gls{spl}.
 It is possible to use constraint solvers to check the consistency of feature configurations of possible products.
 %insert example graphic of a simple fm + explanation here
 \begin{figure}
 \centering
 \caption{A simple Feature Model example}
-\includegraphics[scale=1]{FMexample.png}
+\includegraphics[scale=0.9]{FMexample.png}
 \end{figure}
 
 %TODO steps in dspl engineering: domain analysis (1. context analysis -> define bounds of the domain, 2. domain modeling -> describing the problems in the domain that are addressed, 3. architecture modeling -> create software architecture(s) that solve the problems), variation points, domain modeling (-> FM), architecture modeling
-%To generate a feature model it is necessary to perform an analysis of the domain to be modeled (\textit{domain analysis}) in which every relevant system property is identified and mapped to a feature.
+To generate a feature model of a \gls{spl} it is necessary to perform a \textit{domain analysis} of the domain to be modeled. The term domain describes the set of current and future applications which share a set of common capabilities and data \cite{Kang1990}. In \cite{Kang1990}, Domain analysis serves to identify and represent the information relevant to a domain from various sources and  encompasses three steps: First, analysis of the domain context to define its extent, second, Domain modeling describing the problems addressed by the software within the defined domain, and third, the creation of software architectures that solve problem in the domain. 
+The feature model is created as part of the Feature Analysis during Domain modeling phase. Feature analysis serves to understand the general capabilities and different applications of a domain in order to be able to identify the system properties that directly affect the end-user. Identified features are then abstracted, classified and structured in a feature model.
+%in which every relevant system property is identified and mapped to a feature.
 %feature analysis: 1. identify features 2. abstract and classify the features as a model (FM), defining the features 3. model validation
-%The task of identifying and organizing commonalities and variabilities in the form of shared data and capabilities in a domain is called \textit{Domain Analysis} \cite{Kang1990}.
+%The task of identifying and organizing commonalities and variabilities in the form of shared data and capabilities in a domain is called feature analysis?
 
 %dspls variability specified at design time
 %runtime adaptability through dspls -> context information to trigger adaptations of the FM -> context-aware feature models CFMs, context-aware reconfiguration planning in saller2013
 The more recent approach of \glspl{dspl} \cite{Hallsteinsen2008} allows to bind variability at run-time instead of development time, which can considerably improve a system's capabilities and performance since its configuration is adaptive instead of static during run-time. 
-The concept of \glspl{dspl} offers a way to model transitions between different possible mechanisms in a system. This can be accomplished by modeling different mechanisms as features and representing transitions between mechanisms as reconfigurations in the system's feature model. Specifying transitions this way allows the amount of possible valid reconfigurations to be reduced, allowing the adaptation behaviour of a system to be modeled as transitions between configuration states.%connection to context-aware systems
+The concept of \glspl{dspl} offers a way to model transitions between different possible mechanisms in a system. This can be accomplished by modeling different mechanisms as features and representing transitions between mechanisms as reconfigurations in the system's feature model. Specifying transitions this way allows the amount of possible valid reconfigurations to be reduced, allowing the adaptation behaviour of a system to be modeled as transitions between configuration states and limiting the number of valid transitions to be considered.
+%connection to context-aware systems
 
 \subsection{Context-Aware Feature Models} 
 % relevance of context-awareness to enable adaptability of systems \\
 % introduction to self-adaptive systems that profit from mechanism transitions, (examples in related work?)
-\% may be moved to related work as it is best explained in context of other work and is directly relevant to the thesis
+% mention of papers for related work here as it is best explained in context of other work and is directly relevant to the thesis \\ \\
 %"extension of dspl variability specification given by a context model with requirements imposed by the context environment"
 %model system and context separately (acher)
 % specify requirements of run-time contexts via cross-tree constraints between context and system -> provide preplanning and execution of product reconfigurations at runtime

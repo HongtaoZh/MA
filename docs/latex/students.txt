@@ -732,3 +732,50 @@ Warning--empty journal in Freudenreich2015
 Warning--empty journal in Pandit2004
 Warning--there's a number but no volume in Pandit2004
 (There were 9 error messages)
+This is BibTeX, Version 0.99d (TeX Live 2016/Debian)
+The top-level auxiliary file: tudkom.aux
+The style file: plainnat.bst
+Database file #1: library.bib
+Repeated entry---line 415 of file library.bib
+ : @inproceedings{Cardellini2016
+ :                              ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 901 of file library.bib
+ : @article{Fernandes2008
+ :                       ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 931 of file library.bib
+ : @article{Dey2001
+ :                 ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 958 of file library.bib
+ : @misc{Luckham2011a
+ :                   ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1008 of file library.bib
+ : @article{Chandy2011
+ :                    ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1177 of file library.bib
+ : @article{Cugola2012
+ :                    ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1371 of file library.bib
+ : @article{Eckert2009
+ :                    ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1432 of file library.bib
+ : @misc{Luckham
+ :              ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1515 of file library.bib
+ : @inproceedings{Cardellini2016
+ :                              ,
+I'm skipping whatever remains of this entry
+Warning--there's a number but no volume in Chandy2011
+Warning--empty journal in Fernandes2008
+Warning--there's a number but no volume in Fernandes2008
+Warning--empty journal in Freudenreich2015
+Warning--empty journal in Pandit2004
+Warning--there's a number but no volume in Pandit2004
+(There were 9 error messages)
