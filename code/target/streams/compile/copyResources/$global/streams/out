@@ -1,0 +1,6 @@
+[0m[[0mdebug[0m] [0mCopy resource mappings: [0m
+[0m[[0mdebug[0m] [0m	(/home/manisha/Documents/gitlab/MA-Raheel/src/main/resources/logback.xml,/home/manisha/Documents/gitlab/MA-Raheel/target/scala-2.12/classes/logback.xml)[0m
+[0m[[0mdebug[0m] [0m	(/home/manisha/Documents/gitlab/MA-Raheel/src/main/resources/dev.conf,/home/manisha/Documents/gitlab/MA-Raheel/target/scala-2.12/classes/dev.conf)[0m
+[0m[[0mdebug[0m] [0m	(/home/manisha/Documents/gitlab/MA-Raheel/src/main/resources/simulation.conf,/home/manisha/Documents/gitlab/MA-Raheel/target/scala-2.12/classes/simulation.conf)[0m
+[0m[[0mdebug[0m] [0m	(/home/manisha/Documents/gitlab/MA-Raheel/src/main/resources/application.conf,/home/manisha/Documents/gitlab/MA-Raheel/target/scala-2.12/classes/application.conf)[0m
+[0m[[0mdebug[0m] [0m	(/home/manisha/Documents/gitlab/MA-Raheel/src/main/resources/benchmark.conf,/home/manisha/Documents/gitlab/MA-Raheel/target/scala-2.12/classes/benchmark.conf)[0m
