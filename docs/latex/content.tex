@@ -112,7 +112,7 @@ The processing of events with \gls{cep} can be summarized as follows: Data sourc
 Queries - sometimes also referred to as event patterns \cite{Luckham2011a} or event definition rules \cite{Cugola2013} - consist of one or more operators connected in a graph. \gls{cep} operators can be categorized as follows \cite{Freudenreich2015}:
 \begin{itemize}
 \item Aggregation: operations that are applied to a finite set of values, like count, sum, average, median, minimum, maximum. Since streams are potentially unbounded, some form of windowing (tumbling or sliding window of the last x events or of the last y seconds) has to be applied to the stream so it can be processed by these operators.
-\item Composition: combination of information from two or more events, not necessarily of the same type, into a new event. This event conveys new information by relating two or more events to each other
+\item Composition: combination of information from two or more events, not necessarily of the same type, into a new event. This event conveys new information by relating two or more events to each other. Typical composition operators include conjunction, sequence (specific events happen in order), negation of a sequence (a specific event does not occur between two events) \cite{Eckert2009}
 \item Derivation: using knowledge about domain semantics and/or external knowledge, a new event is derived through reasoning about information from incoming events and information from knowledge
 \end{itemize}
 
@@ -159,7 +159,7 @@ These non-functional properties and \gls{qos} metrics can be, among others:
 \item energy consumption
 \end{itemize}
 %TODO citations
-Currently, most operator placement algorithms focus on optimizing latency \cite{} and/or load balancing \cite{}, but other metrics like energy consumption have been adressed as well \cite{}. 
+Currently, most operator placement algorithms discussed in literature focus on optimizing latency \cite{Pandit2004} bandwidth \cite{Ahmad2004} \cite{Schilling2010}, load balancing \cite{Xing2005} or combinations of latency and bandwidth  \cite{Pietzuch2006} \cite{Rizou2010} or latency and load balancing \cite{Heinze2013}, but other metrics like energy consumption have been adressed as well \cite{Bonfils2004}. 
 Besides optimizing one or more \gls{qos} metric(s), every placement algorithm is designed for specific situations characterised by network conditions like traffic type (bursty or uniform), network topology (distributed or clustered), and stability of connections and queries. 
 
 %central vs decentral placement decisions
@@ -185,31 +185,33 @@ To account for this network context variability, operator placement algorithms o
 To ensure that the placement remains optimal during run-time, an adaptation strategy may monitor changes in the \gls{qos} measurements and can periodically re-evaluate the current placement. It can then decide to adapt the placement through migration of single operators onto new hosts, though this might be limited to cases where expected performance gains exceed the estimated impact of the migration process to avoid constant oscillation of an operator between two hosts that would negatively affect performance.
 
 % static placement algorithms -> motivation for thesis topic; adaptation of adaptation mechanisms
-While periodic re-evaluation of the placement enables the system to react to changes in the underlying network to a certain degree, there is currently no way to automatically adapt the utilized placement algorithm or other mechanisms to major changes in the context that adversely affect the \gls{qos} demands of users. If any part of the network or application context (e.g. network conditions, network topology, type of \gls{qos} demands on queries, event frequency) is changed significantly, the adaptation mechanisms (e.g. placement algorithm) that was used before may no longer be optimal as it was intended for a different context. To guarantee a steady level of system performance and the observance of \gls{qos} demands imposed on the queries by users (if supported by the \gls{cep} system), some form of context awareness and adaptability of the system is necessary to make transitions between different mechanisms possible.
+While periodic re-evaluation of the placement enables the system to react to changes in the underlying network to a certain degree, there is currently no way to automatically adapt the utilized placement algorithm or other mechanisms to major changes in the context that adversely affect the \gls{qos} demands of users. If any part of the network or application context (e.g. network conditions, network topology, type of \gls{qos} demands on queries, event frequency) is changed significantly, the adaptation mechanisms (e.g. placement algorithm) that was used before may no longer be optimal as it was intended for a different context. To guarantee a steady level of system performance and the observance of \gls{qos} demands imposed on the queries by users (if supported by the \gls{cep} system), some form of context awareness and adaptability of the system is necessary to make context-based transitions between different mechanisms possible.
 
 %other mechanisms: query optimization, replication
 Further mechanisms to keep \gls{qos} demands satisfied involve the optimization of the operator graph before its deployment to the network, as well as parallelization of processing steps by replication of the same operator onto multiple hosts to increase throughput (operator replication). It is also possible to identify parts of operator graphs that are identical for different queries and let several queries share these processing steps to avoid duplicate processing of events (operator re-use).
 
 \section{Dynamic Software Product Lines and Feature Models}
-\% terms and definitions, FODA notation \\
+% terms and definitions, FODA notation \\
 
 %introduction: past(new software variant for every new product) -> near past SPLs and present DSPLs, re-use of modularized software, individual products derived from spl
-With the complexity and size of software systems increasing over time, approaches were envisioned that help reduce the time and effort necessary to develop a new software product. Often products similar to existing ones have to be developed that differ only in a small set of features and functions to fulfill customer-specific requirements.
-\Gls{spl} are used in Software Engineering to specify a family of software products that solve similar problems and as a consequence have a a set of commonalities and variation points. Instead of starting every product in an application domain from scratch, the parts of the software system that solve identical tasks can be re-used in every product, saving development time. 
+With the complexity and size of software systems increasing over time, approaches have been envisioned that help reduce the time and effort necessary to develop a new software product. Often products similar to existing ones have to be developed that differ only in a small set of features and functions to fulfill customer-specific requirements.
+\Gls{spl} are used in Software Engineering to specify a family of software products that solve similar problems and as a consequence have a a set of commonalities and variation points. Instead of starting every product in an application domain from scratch, the parts of the software system that solve identical tasks within the domain can be re-used in individual products, saving development effort. 
 \Gls{spl} allow the systematic derivation of individual product variants based on the requirements imposed by a customer's application. 
 % product configuration of an spl gained by binding all variability
-An instance of a product is obtained by binding all variability captured in the \gls{spl} to a specific valid configuration of selected features.
-%TODO steps in dspl engineering: domain analysis, variation points, domain modeling (-> FM), architecture modeling
-%The task of identifying and organizing commonalities and variabilities in the form of shared data and capabilities in a domain is called \textit{Domain Analysis} \cite{Kang1990}.
-
+An instance of a product from a product line is obtained by binding all variability captured in the \gls{spl} to a specific valid configuration of selected features.
 % definition of feature (1 system property during domain engineering, 2 product configuration parameter during application engineering for deriving specific variants)
-A feature is a distinctive user-visible system property identified during domain engineering and a product configuration parameter during application engineering \cite{Saller2013}.
+A feature can be defined as a relevant system property and is used to capture commonalities and variabilities among products in a product line \cite{Fernandes2008}; it is a distinctive user-visible system property identified during domain engineering and a product configuration parameter during application engineering \cite{Saller2013}.
+
 %FMs
-% FODA notation with an example (mock example of adaptivecep?), groups, constraints
+% FODA notation with an example (mock example of ...?), groups, constraints
 %constraints -> model validation, valid configuration specification through FMs, restriction of valid configuration space
-\textit{gls{fm}} are a formalism to represent common and variable parts of an \Gls{spl} in a tree structure and were first described in \cite{Kang1990}. They allow to define a hierarchical structure of alternative (xor, exactly one feature may be chosen) and or-groups (arbitrary choice) of features. Groups of features and individual features are either mandatory or optional. Dependencies between features from different groups can be represented as cross-tree constraints in the form of the \textit{requires} and \textit{excludes} relation. Through the tree structure and the cross-tree constraints the space of valid feature configurations is confined to those that represent actually producible software products. Thus the \gls{fm} specifies what products can be derived from the \gls{spl}.
+\textit{gls{fm}} are a formalism to represent a domain and the common and variable parts of a \Gls{spl} in a tree structure and were first described in \cite{Kang1990}. They allow to define a hierarchical structure of alternative (xor, exactly one feature may be chosen) and or-groups (arbitrary choice) of features. The choice of groups of features and individual features is either mandatory or optional. For a child feature to be selected, the parent must be selected as well, which allows the representation of hierarchical dependencies between features. Dependencies between features from different groups can be represented as cross-tree constraints in the form of the \textit{requires} and \textit{excludes} relations. Through the tree structure and the cross-tree constraints the space of valid feature configurations is confined to those that represent actually producible software products. Thus the feature model is a means to specify what products can be derived from the \gls{spl}.
 It is possible to use constraint solvers to check the consistency of feature configurations of possible products.
-%TODO insert example graphic + explanation here
+%TODO insert example graphic of a simple fm + explanation here
+
+%TODO steps in dspl engineering: domain analysis, variation points, domain modeling (-> FM), architecture modeling
+To generate a feature model it is necessary to perform an analysis of the domain to be modeled (\textit{domain analysis}) in which every relevant system property is identified and mapped to a feature.
+%The task of identifying and organizing commonalities and variabilities in the form of shared data and capabilities in a domain is called \textit{Domain Analysis} \cite{Kang1990}.
 
 %dspls variability specified at design time
 %runtime adaptability through dspls -> context information to trigger adaptations of the FM -> context-aware feature models CFMs, context-aware reconfiguration planning in saller2013
