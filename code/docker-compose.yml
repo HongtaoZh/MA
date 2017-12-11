@@ -1,0 +1,214 @@
+version: "3"
+services:
+
+  viv:
+    build:
+      context: .
+    volumes:
+      - ivy:/Users/mac/.ivy2
+      - sbt:/Users/mac/.sbt
+    environment:
+      - MAIN="adaptivecep.machinenodes.VivaldiApp"
+      - ARGS="--port 2549"
+    ports:
+      - "2549"
+    networks:
+        main:
+    privileged: true
+
+  simpla:
+    build:
+      context: .
+    volumes:
+      - ivy:/Users/mac/.ivy2
+      - sbt:/Users/mac/.sbt
+    environment:
+      - MAIN="adaptivecep.machinenodes.VivaldiApp"
+      - ARGS="--port 2557"
+    depends_on:
+      - viv
+    ports:
+      - "2557"
+    networks:
+        main:
+
+    privileged: true
+
+  simplb:
+    build:
+      context: .
+    volumes:
+      - ivy:/Users/mac/.ivy2
+      - sbt:/Users/mac/.sbt
+    depends_on:
+      - viv
+    environment:
+      - MAIN="adaptivecep.machinenodes.VivaldiApp"
+      - ARGS="--port 2558"
+    ports:
+      - "2558"
+    networks:
+        main:
+
+    privileged: true
+
+
+  simplc:
+    build:
+      context: .
+    depends_on:
+      - viv
+    volumes:
+      - ivy:/Users/mac/.ivy2
+      - sbt:/Users/mac/.sbt
+    environment:
+      - MAIN="adaptivecep.machinenodes.VivaldiApp"
+      - ARGS="--port 2559"
+    ports:
+      - "2559"
+    networks:
+        main:
+
+    privileged: true
+
+
+  simpld:
+    build:
+      context: .
+    depends_on:
+      - viv
+    volumes:
+      - ivy:/Users/mac/.ivy2
+      - sbt:/Users/mac/.sbt
+    environment:
+      - MAIN="adaptivecep.machinenodes.VivaldiApp"
+      - ARGS="--port 2560"
+    ports:
+      - "2560"
+    networks:
+        main:
+
+    privileged: true
+
+
+  simple:
+    build:
+      context: .
+    depends_on:
+      - viv
+    volumes:
+      - ivy:/Users/mac/.ivy2
+      - sbt:/Users/mac/.sbt
+    environment:
+      - MAIN="adaptivecep.machinenodes.VivaldiApp"
+      - ARGS="--port 2562"
+    ports:
+      - "2562"
+    networks:
+        main:
+
+    privileged: true
+
+
+  puba:
+    build:
+      context: .
+    depends_on:
+      - viv
+    volumes:
+      - ivy:/Users/mac/.ivy2
+      - sbt:/Users/mac/.sbt
+    environment:
+      - MAIN="adaptivecep.machinenodes.VivaldiApp"
+      - ARGS="--port 2551"
+    ports:
+      - "2551"
+    networks:
+        main:
+
+    privileged: true
+
+
+  pubb:
+    build:
+      context: .
+    depends_on:
+      - viv
+    volumes:
+      - ivy:/Users/mac/.ivy2
+      - sbt:/Users/mac/.sbt
+    environment:
+      - MAIN="adaptivecep.machinenodes.VivaldiApp"
+      - ARGS="--port 2552"
+    ports:
+      - "2552"
+    networks:
+        main:
+
+    privileged: true
+
+
+  pubc:
+    build:
+      context: .
+    depends_on:
+      - viv
+    volumes:
+      - ivy:/Users/mac/.ivy2
+      - sbt:/Users/mac/.sbt
+    environment:
+      - MAIN="adaptivecep.machinenodes.VivaldiApp"
+      - ARGS="--port 2553"
+    ports:
+      - "2553"
+    networks:
+        main:
+
+    privileged: true
+
+
+  subs:
+    build:
+      context: .
+    depends_on:
+      - viv
+    volumes:
+      - ivy:/Users/mac/.ivy2
+      - sbt:/Users/mac/.sbt
+    environment:
+      - MAIN="adaptivecep.machinenodes.VivaldiApp"
+      - ARGS="--port 2561"
+    ports:
+      - "2561"
+    networks:
+        main:
+
+    privileged: true
+
+  bench:
+    build:
+      context: .
+    depends_on:
+      - viv
+    volumes:
+      - ivy:/Users/mac/.ivy2
+      - sbt:/Users/mac/.sbt
+    environment:
+      - MAIN="adaptivecep.machinenodes.VivaldiApp"
+      - ARGS="--port 2550"
+    ports:
+      - "2550"
+    networks:
+        main:
+
+    privileged: true
+
+networks:
+  main:
+    driver: bridge
+
+volumes:
+   ivy:
+    external: true
+   sbt:
+    external: true
