@@ -95,7 +95,7 @@
 }
 
 %acronym package, load after hyperref package
-\usepackage[toc, acronym, nopostdot, nonumberlist]{glossaries}
+\usepackage[toc, acronym, nopostdot, nonumberlist, nomain]{glossaries}
 \makeglossaries
 %============================================
 % Setup of the title page (do not change)
@@ -178,6 +178,15 @@
 	
 	
 	\input{glossary}
+	\newacronym{cep}{CEP}{Complex Event Processing}
+	\newacronym{esp}{ESP}{Event Stream Processing}
+	\newacronym{qos}{QoS}{Quality of Service}
+	\newacronym{dbms}{DBMS}{Database Management System}
+	\newacronym{dsms}{DSMS}{Data Stream Management System}
+	\newacronym{cfm}{CFM}{Context-aware Feature Model}
+	\newacronym{dspl}{DSPL}{Dynamic Software Product Line}
+	\newacronym{spl}{SPL}{Software Product Line}
+	\newacronym{fm}{FM}{Feature Model}
 	\printglossaries
 			
 	\addcontentsline{toc}{chapter}{\bibname}

@@ -1,0 +1,89 @@
+This is BibTeX, Version 0.99d (TeX Live 2016/Debian)
+Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
+The top-level auxiliary file: tudkom.aux
+The style file: plainnat.bst
+Database file #1: library.bib
+Repeated entry---line 673 of file library.bib
+ : @inproceedings{Cardellini2016
+ :                              ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 823 of file library.bib
+ : @misc{Luckham
+ :              ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 895 of file library.bib
+ : @misc{Luckham2011a
+ :                   ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 921 of file library.bib
+ : @article{Dey2001
+ :                 ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1215 of file library.bib
+ : @article{Fernandes2008
+ :                       ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1237 of file library.bib
+ : @article{Chandy2011
+ :                    ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1249 of file library.bib
+ : @article{Eckert2009
+ :                    ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1350 of file library.bib
+ : @inproceedings{Cardellini2016
+ :                              ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1642 of file library.bib
+ : @article{Cugola2012
+ :                    ,
+I'm skipping whatever remains of this entry
+Warning--there's a number but no volume in Chandy2011
+Warning--empty journal in Fernandes2008
+Warning--there's a number but no volume in Fernandes2008
+Warning--empty journal in Freudenreich2015
+Warning--empty journal in Pandit2004
+Warning--there's a number but no volume in Pandit2004
+You've used 24 entries,
+            2773 wiz_defined-function locations,
+            807 strings with 10809 characters,
+and the built_in function-call counts, 12619 in all, are:
+= -- 1200
+> -- 730
+< -- 15
++ -- 246
+- -- 222
+* -- 1069
+:= -- 1943
+add.period$ -- 111
+call.type$ -- 24
+change.case$ -- 146
+chr.to.int$ -- 24
+cite$ -- 54
+duplicate$ -- 539
+empty$ -- 951
+format.name$ -- 256
+if$ -- 2652
+int.to.chr$ -- 1
+int.to.str$ -- 1
+missing$ -- 22
+newline$ -- 167
+num.names$ -- 96
+pop$ -- 250
+preamble$ -- 1
+purify$ -- 122
+quote$ -- 0
+skip$ -- 437
+stack$ -- 0
+substring$ -- 485
+swap$ -- 73
+text.length$ -- 6
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 264
+warning$ -- 6
+while$ -- 116
+width$ -- 0
+write$ -- 390
+(There were 9 error messages)

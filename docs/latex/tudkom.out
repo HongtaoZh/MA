@@ -1,0 +1,42 @@
+\BOOKMARK [0][]{chapter.1}{1 Introduction and Motivation}{}% 1
+\BOOKMARK [1][-]{section.1.1}{1.1 Problem Statement}{chapter.1}% 2
+\BOOKMARK [1][-]{section.1.2}{1.2 Goals}{chapter.1}% 3
+\BOOKMARK [1][-]{section.1.3}{1.3 Outline}{chapter.1}% 4
+\BOOKMARK [0][]{chapter.2}{2 Background}{}% 5
+\BOOKMARK [1][-]{section.2.1}{2.1 Event and Data Stream Processing}{chapter.2}% 6
+\BOOKMARK [2][-]{subsection.2.1.1}{2.1.1 Distributed Stream Processing and Operator Placement}{section.2.1}% 7
+\BOOKMARK [2][-]{subsection.2.1.2}{2.1.2 Adaptation mechanisms in CEP}{section.2.1}% 8
+\BOOKMARK [1][-]{section.2.2}{2.2 Dynamic Software Product Lines and Feature Models}{chapter.2}% 9
+\BOOKMARK [2][-]{subsection.2.2.1}{2.2.1 Context-Aware Feature Models}{section.2.2}% 10
+\BOOKMARK [0][]{chapter.3}{3 Related Work}{}% 11
+\BOOKMARK [1][-]{section.3.1}{3.1 Context Modeling for Event-based Systems}{chapter.3}% 12
+\BOOKMARK [2][-]{subsection.3.1.1}{3.1.1 Context Modeling Techniques}{section.3.1}% 13
+\BOOKMARK [2][-]{subsection.3.1.2}{3.1.2 Feature Models for Context-Aware Systems}{section.3.1}% 14
+\BOOKMARK [1][-]{section.3.2}{3.2 Adaptation and Context-Awareness for EBS}{chapter.3}% 15
+\BOOKMARK [1][-]{section.3.3}{3.3 Performance Prediction using Feature Models}{chapter.3}% 16
+\BOOKMARK [1][-]{section.3.4}{3.4 Comparative Analysis and Discussion}{chapter.3}% 17
+\BOOKMARK [1][-]{section.3.5}{3.5 Summary}{chapter.3}% 18
+\BOOKMARK [0][]{chapter.4}{4 Context-aware Feature Model and Mechanism Transition Approach}{}% 19
+\BOOKMARK [1][-]{section.4.1}{4.1 Context Feature Model Design}{chapter.4}% 20
+\BOOKMARK [2][-]{subsection.4.1.1}{4.1.1 Requirement Analysis}{section.4.1}% 21
+\BOOKMARK [2][-]{subsection.4.1.2}{4.1.2 Context-aware Feature Model Proposal}{section.4.1}% 22
+\BOOKMARK [1][-]{section.4.2}{4.2 Mechanism Transition Prediction Approach}{chapter.4}% 23
+\BOOKMARK [1][-]{section.4.3}{4.3 Summary}{chapter.4}% 24
+\BOOKMARK [0][]{chapter.5}{5 Implementation}{}% 25
+\BOOKMARK [1][-]{section.5.1}{5.1 Design Decisions}{chapter.5}% 26
+\BOOKMARK [1][-]{section.5.2}{5.2 Architecture}{chapter.5}% 27
+\BOOKMARK [2][-]{subsection.5.2.1}{5.2.1 Context Feature Model}{section.5.2}% 28
+\BOOKMARK [2][-]{subsection.5.2.2}{5.2.2 Mechanism Transition Prediction Approach}{section.5.2}% 29
+\BOOKMARK [1][-]{section.5.3}{5.3 Interaction of Components}{chapter.5}% 30
+\BOOKMARK [1][-]{section.5.4}{5.4 Summary}{chapter.5}% 31
+\BOOKMARK [0][]{chapter.6}{6 Evaluation}{}% 32
+\BOOKMARK [1][-]{section.6.1}{6.1 Methodology}{chapter.6}% 33
+\BOOKMARK [1][-]{section.6.2}{6.2 Evaluation Setup}{chapter.6}% 34
+\BOOKMARK [1][-]{section.6.3}{6.3 Results}{chapter.6}% 35
+\BOOKMARK [1][-]{section.6.4}{6.4 Analysis and Discussion}{chapter.6}% 36
+\BOOKMARK [0][]{chapter.7}{7 Conclusion}{}% 37
+\BOOKMARK [1][-]{section.7.1}{7.1 Summary}{chapter.7}% 38
+\BOOKMARK [1][-]{section.7.2}{7.2 Contributions}{chapter.7}% 39
+\BOOKMARK [1][-]{section.7.3}{7.3 Future Work and Final Remarks}{chapter.7}% 40
+\BOOKMARK [0][]{section*.14}{Acronyms}{}% 41
+\BOOKMARK [0][]{section*.17}{Bibliography}{}% 42

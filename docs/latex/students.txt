@@ -204,3 +204,531 @@ I'm skipping whatever remains of this entry
 Warning--there's a number but no volume in Chandy2011
 Warning--empty journal in Freudenreich2015
 (There were 5 error messages)
+makeglossaries version 2.20 (2016-12-16)
+added glossary type 'main' (glg,gls,glo)
+added glossary type 'acronym' (alg,acr,acn)
+makeglossaries version 2.20 (2016-12-16)
+added glossary type 'main' (glg,gls,glo)
+added glossary type 'acronym' (alg,acr,acn)
+makeglossaries version 2.20 (2016-12-16)
+added glossary type 'main' (glg,gls,glo)
+added glossary type 'acronym' (alg,acr,acn)
+makeglossaries version 2.21 (2017-05-11)
+makeglossaries version 2.20 (2016-12-16)
+added glossary type 'main' (glg,gls,glo)
+added glossary type 'acronym' (alg,acr,acn)
+This is BibTeX, Version 0.99d (TeX Live 2016/Debian)
+The top-level auxiliary file: tudkom.aux
+I found no \citation commands---while reading file tudkom.aux
+I found no \bibdata command---while reading file tudkom.aux
+I found no \bibstyle command---while reading file tudkom.aux
+(There were 3 error messages)
+This is BibTeX, Version 0.99d (TeX Live 2016/Debian)
+The top-level auxiliary file: tudkom.aux
+I found no \citation commands---while reading file tudkom.aux
+I found no \bibdata command---while reading file tudkom.aux
+I found no \bibstyle command---while reading file tudkom.aux
+(There were 3 error messages)
+This is BibTeX, Version 0.99d (TeX Live 2016/Debian)
+The top-level auxiliary file: tudkom.aux
+I found no \citation commands---while reading file tudkom.aux
+I found no \bibdata command---while reading file tudkom.aux
+I found no \bibstyle command---while reading file tudkom.aux
+(There were 3 error messages)
+This is BibTeX, Version 0.99d (TeX Live 2016/Debian)
+The top-level auxiliary file: tudkom.aux
+I found no \citation commands---while reading file tudkom.aux
+I found no \bibdata command---while reading file tudkom.aux
+I found no \bibstyle command---while reading file tudkom.aux
+(There were 3 error messages)
+This is BibTeX, Version 0.99d (TeX Live 2016/Debian)
+The top-level auxiliary file: tudkom.aux
+I found no \bibdata command---while reading file tudkom.aux
+I found no \bibstyle command---while reading file tudkom.aux
+(There were 2 error messages)
+This is BibTeX, Version 0.99d (TeX Live 2016/Debian)
+The top-level auxiliary file: tudkom.aux
+The style file: plainnat.bst
+Database file #1: library.bib
+Repeated entry---line 1068 of file library.bib
+ : @article{Dey2001
+ :                 ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1083 of file library.bib
+ : @inproceedings{Cardellini2016
+ :                              ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1125 of file library.bib
+ : @misc{Luckham2011a
+ :                   ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1189 of file library.bib
+ : @inproceedings{Cardellini2016
+ :                              ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1381 of file library.bib
+ : @article{Cugola2012
+ :                    ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1418 of file library.bib
+ : @article{Eckert2009
+ :                    ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1500 of file library.bib
+ : @article{Chandy2011
+ :                    ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1611 of file library.bib
+ : @misc{Luckham
+ :              ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1670 of file library.bib
+ : @article{Fernandes2008
+ :                       ,
+I'm skipping whatever remains of this entry
+Warning--there's a number but no volume in Chandy2011
+Warning--empty journal in Fernandes2008
+Warning--there's a number but no volume in Fernandes2008
+Warning--empty journal in Freudenreich2015
+Warning--empty journal in Pandit2004
+Warning--there's a number but no volume in Pandit2004
+(There were 9 error messages)
+This is BibTeX, Version 0.99d (TeX Live 2016/Debian)
+The top-level auxiliary file: tudkom.aux
+I found no \citation commands---while reading file tudkom.aux
+I found no \bibdata command---while reading file tudkom.aux
+I found no \bibstyle command---while reading file tudkom.aux
+(There were 3 error messages)
+This is BibTeX, Version 0.99d (TeX Live 2016/Debian)
+The top-level auxiliary file: tudkom.aux
+I found no \citation commands---while reading file tudkom.aux
+I found no \bibdata command---while reading file tudkom.aux
+I found no \bibstyle command---while reading file tudkom.aux
+(There were 3 error messages)
+This is BibTeX, Version 0.99d (TeX Live 2016/Debian)
+The top-level auxiliary file: tudkom.aux
+I found no \citation commands---while reading file tudkom.aux
+I found no \bibdata command---while reading file tudkom.aux
+I found no \bibstyle command---while reading file tudkom.aux
+(There were 3 error messages)
+This is BibTeX, Version 0.99d (TeX Live 2016/Debian)
+The top-level auxiliary file: tudkom.aux
+I found no \citation commands---while reading file tudkom.aux
+I found no \bibdata command---while reading file tudkom.aux
+I found no \bibstyle command---while reading file tudkom.aux
+(There were 3 error messages)
+This is BibTeX, Version 0.99d (TeX Live 2016/Debian)
+The top-level auxiliary file: tudkom.aux
+I found no \citation commands---while reading file tudkom.aux
+I found no \bibdata command---while reading file tudkom.aux
+I found no \bibstyle command---while reading file tudkom.aux
+(There were 3 error messages)
+This is BibTeX, Version 0.99d (TeX Live 2016/Debian)
+The top-level auxiliary file: tudkom.aux
+I found no \citation commands---while reading file tudkom.aux
+I found no \bibdata command---while reading file tudkom.aux
+I found no \bibstyle command---while reading file tudkom.aux
+(There were 3 error messages)
+This is BibTeX, Version 0.99d (TeX Live 2016/Debian)
+The top-level auxiliary file: tudkom.aux
+I found no \citation commands---while reading file tudkom.aux
+I found no \bibdata command---while reading file tudkom.aux
+I found no \bibstyle command---while reading file tudkom.aux
+(There were 3 error messages)
+This is BibTeX, Version 0.99d (TeX Live 2016/Debian)
+The top-level auxiliary file: tudkom.aux
+I found no \citation commands---while reading file tudkom.aux
+I found no \bibdata command---while reading file tudkom.aux
+I found no \bibstyle command---while reading file tudkom.aux
+(There were 3 error messages)
+This is BibTeX, Version 0.99d (TeX Live 2016/Debian)
+The top-level auxiliary file: tudkom.aux
+I found no \citation commands---while reading file tudkom.aux
+I found no \bibdata command---while reading file tudkom.aux
+I found no \bibstyle command---while reading file tudkom.aux
+(There were 3 error messages)
+This is BibTeX, Version 0.99d (TeX Live 2016/Debian)
+The top-level auxiliary file: tudkom.aux
+I found no \citation commands---while reading file tudkom.aux
+I found no \bibdata command---while reading file tudkom.aux
+I found no \bibstyle command---while reading file tudkom.aux
+(There were 3 error messages)
+This is BibTeX, Version 0.99d (TeX Live 2016/Debian)
+The top-level auxiliary file: tudkom.aux
+I found no \citation commands---while reading file tudkom.aux
+I found no \bibdata command---while reading file tudkom.aux
+I found no \bibstyle command---while reading file tudkom.aux
+(There were 3 error messages)
+This is BibTeX, Version 0.99d (TeX Live 2016/Debian)
+The top-level auxiliary file: tudkom.aux
+I found no \citation commands---while reading file tudkom.aux
+I found no \bibdata command---while reading file tudkom.aux
+I found no \bibstyle command---while reading file tudkom.aux
+(There were 3 error messages)
+This is BibTeX, Version 0.99d (TeX Live 2016/Debian)
+The top-level auxiliary file: tudkom.aux
+I found no \citation commands---while reading file tudkom.aux
+I found no \bibdata command---while reading file tudkom.aux
+I found no \bibstyle command---while reading file tudkom.aux
+(There were 3 error messages)
+This is BibTeX, Version 0.99d (TeX Live 2016/Debian)
+The top-level auxiliary file: tudkom.aux
+I found no \citation commands---while reading file tudkom.aux
+I found no \bibdata command---while reading file tudkom.aux
+I found no \bibstyle command---while reading file tudkom.aux
+(There were 3 error messages)
+This is BibTeX, Version 0.99d (TeX Live 2016/Debian)
+The top-level auxiliary file: tudkom.aux
+I found no \citation commands---while reading file tudkom.aux
+I found no \bibdata command---while reading file tudkom.aux
+I found no \bibstyle command---while reading file tudkom.aux
+(There were 3 error messages)
+This is BibTeX, Version 0.99d (TeX Live 2016/Debian)
+The top-level auxiliary file: tudkom.aux
+The style file: plainnat.bst
+Database file #1: library.bib
+Repeated entry---line 1068 of file library.bib
+ : @article{Dey2001
+ :                 ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1083 of file library.bib
+ : @inproceedings{Cardellini2016
+ :                              ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1125 of file library.bib
+ : @misc{Luckham2011a
+ :                   ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1189 of file library.bib
+ : @inproceedings{Cardellini2016
+ :                              ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1381 of file library.bib
+ : @article{Cugola2012
+ :                    ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1418 of file library.bib
+ : @article{Eckert2009
+ :                    ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1500 of file library.bib
+ : @article{Chandy2011
+ :                    ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1611 of file library.bib
+ : @misc{Luckham
+ :              ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1670 of file library.bib
+ : @article{Fernandes2008
+ :                       ,
+I'm skipping whatever remains of this entry
+Warning--I didn't find a database entry for "Schilling2010"
+Warning--I didn't find a database entry for ""
+Warning--there's a number but no volume in Chandy2011
+Warning--empty journal in Fernandes2008
+Warning--there's a number but no volume in Fernandes2008
+Warning--empty journal in Freudenreich2015
+Warning--empty journal in Pandit2004
+Warning--there's a number but no volume in Pandit2004
+(There were 9 error messages)
+This is BibTeX, Version 0.99d (TeX Live 2016/Debian)
+The top-level auxiliary file: tudkom.aux
+I found no \bibdata command---while reading file tudkom.aux
+I found no \bibstyle command---while reading file tudkom.aux
+(There were 2 error messages)
+This is BibTeX, Version 0.99d (TeX Live 2016/Debian)
+The top-level auxiliary file: tudkom.aux
+I found no \bibdata command---while reading file tudkom.aux
+I found no \bibstyle command---while reading file tudkom.aux
+(There were 2 error messages)
+This is BibTeX, Version 0.99d (TeX Live 2016/Debian)
+The top-level auxiliary file: tudkom.aux
+I found no \bibdata command---while reading file tudkom.aux
+I found no \bibstyle command---while reading file tudkom.aux
+(There were 2 error messages)
+This is BibTeX, Version 0.99d (TeX Live 2016/Debian)
+The top-level auxiliary file: tudkom.aux
+The style file: plainnat.bst
+Database file #1: library.bib
+Repeated entry---line 1068 of file library.bib
+ : @article{Dey2001
+ :                 ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1083 of file library.bib
+ : @inproceedings{Cardellini2016
+ :                              ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1125 of file library.bib
+ : @misc{Luckham2011a
+ :                   ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1189 of file library.bib
+ : @inproceedings{Cardellini2016
+ :                              ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1381 of file library.bib
+ : @article{Cugola2012
+ :                    ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1418 of file library.bib
+ : @article{Eckert2009
+ :                    ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1500 of file library.bib
+ : @article{Chandy2011
+ :                    ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1611 of file library.bib
+ : @misc{Luckham
+ :              ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1670 of file library.bib
+ : @article{Fernandes2008
+ :                       ,
+I'm skipping whatever remains of this entry
+Warning--I didn't find a database entry for "Schilling2010"
+Warning--I didn't find a database entry for ""
+Warning--there's a number but no volume in Chandy2011
+Warning--empty journal in Fernandes2008
+Warning--there's a number but no volume in Fernandes2008
+Warning--empty journal in Freudenreich2015
+Warning--empty journal in Pandit2004
+Warning--there's a number but no volume in Pandit2004
+(There were 9 error messages)
+This is BibTeX, Version 0.99d (TeX Live 2016/Debian)
+The top-level auxiliary file: tudkom.aux
+The style file: plainnat.bst
+Database file #1: library.bib
+Repeated entry---line 1068 of file library.bib
+ : @article{Dey2001
+ :                 ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1083 of file library.bib
+ : @inproceedings{Cardellini2016
+ :                              ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1125 of file library.bib
+ : @misc{Luckham2011a
+ :                   ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1189 of file library.bib
+ : @inproceedings{Cardellini2016
+ :                              ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1381 of file library.bib
+ : @article{Cugola2012
+ :                    ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1418 of file library.bib
+ : @article{Eckert2009
+ :                    ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1500 of file library.bib
+ : @article{Chandy2011
+ :                    ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1611 of file library.bib
+ : @misc{Luckham
+ :              ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1670 of file library.bib
+ : @article{Fernandes2008
+ :                       ,
+I'm skipping whatever remains of this entry
+Warning--I didn't find a database entry for ""
+Warning--there's a number but no volume in Chandy2011
+Warning--empty journal in Fernandes2008
+Warning--there's a number but no volume in Fernandes2008
+Warning--empty journal in Freudenreich2015
+Warning--empty journal in Pandit2004
+Warning--there's a number but no volume in Pandit2004
+(There were 9 error messages)
+This is BibTeX, Version 0.99d (TeX Live 2016/Debian)
+The top-level auxiliary file: tudkom.aux
+The style file: plainnat.bst
+Database file #1: library.bib
+Repeated entry---line 673 of file library.bib
+ : @inproceedings{Cardellini2016
+ :                              ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 823 of file library.bib
+ : @misc{Luckham
+ :              ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 895 of file library.bib
+ : @misc{Luckham2011a
+ :                   ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 921 of file library.bib
+ : @article{Dey2001
+ :                 ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1215 of file library.bib
+ : @article{Fernandes2008
+ :                       ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1237 of file library.bib
+ : @article{Chandy2011
+ :                    ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1249 of file library.bib
+ : @article{Eckert2009
+ :                    ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1350 of file library.bib
+ : @inproceedings{Cardellini2016
+ :                              ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1642 of file library.bib
+ : @article{Cugola2012
+ :                    ,
+I'm skipping whatever remains of this entry
+Warning--there's a number but no volume in Chandy2011
+Warning--empty journal in Fernandes2008
+Warning--there's a number but no volume in Fernandes2008
+Warning--empty journal in Freudenreich2015
+Warning--empty journal in Pandit2004
+Warning--there's a number but no volume in Pandit2004
+(There were 9 error messages)
+This is BibTeX, Version 0.99d (TeX Live 2016/Debian)
+The top-level auxiliary file: tudkom.aux
+The style file: plainnat.bst
+Database file #1: library.bib
+Repeated entry---line 673 of file library.bib
+ : @inproceedings{Cardellini2016
+ :                              ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 823 of file library.bib
+ : @misc{Luckham
+ :              ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 895 of file library.bib
+ : @misc{Luckham2011a
+ :                   ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 921 of file library.bib
+ : @article{Dey2001
+ :                 ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1215 of file library.bib
+ : @article{Fernandes2008
+ :                       ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1237 of file library.bib
+ : @article{Chandy2011
+ :                    ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1249 of file library.bib
+ : @article{Eckert2009
+ :                    ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1350 of file library.bib
+ : @inproceedings{Cardellini2016
+ :                              ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1642 of file library.bib
+ : @article{Cugola2012
+ :                    ,
+I'm skipping whatever remains of this entry
+Warning--there's a number but no volume in Chandy2011
+Warning--empty journal in Fernandes2008
+Warning--there's a number but no volume in Fernandes2008
+Warning--empty journal in Freudenreich2015
+Warning--empty journal in Pandit2004
+Warning--there's a number but no volume in Pandit2004
+(There were 9 error messages)
+This is BibTeX, Version 0.99d (TeX Live 2016/Debian)
+The top-level auxiliary file: tudkom.aux
+The style file: plainnat.bst
+Database file #1: library.bib
+Repeated entry---line 673 of file library.bib
+ : @inproceedings{Cardellini2016
+ :                              ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 823 of file library.bib
+ : @misc{Luckham
+ :              ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 895 of file library.bib
+ : @misc{Luckham2011a
+ :                   ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 921 of file library.bib
+ : @article{Dey2001
+ :                 ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1215 of file library.bib
+ : @article{Fernandes2008
+ :                       ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1237 of file library.bib
+ : @article{Chandy2011
+ :                    ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1249 of file library.bib
+ : @article{Eckert2009
+ :                    ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1350 of file library.bib
+ : @inproceedings{Cardellini2016
+ :                              ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1642 of file library.bib
+ : @article{Cugola2012
+ :                    ,
+I'm skipping whatever remains of this entry
+Warning--there's a number but no volume in Chandy2011
+Warning--empty journal in Fernandes2008
+Warning--there's a number but no volume in Fernandes2008
+Warning--empty journal in Freudenreich2015
+Warning--empty journal in Pandit2004
+Warning--there's a number but no volume in Pandit2004
+(There were 9 error messages)
+This is BibTeX, Version 0.99d (TeX Live 2016/Debian)
+The top-level auxiliary file: tudkom.aux
+The style file: plainnat.bst
+Database file #1: library.bib
+Repeated entry---line 673 of file library.bib
+ : @inproceedings{Cardellini2016
+ :                              ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 823 of file library.bib
+ : @misc{Luckham
+ :              ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 895 of file library.bib
+ : @misc{Luckham2011a
+ :                   ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 921 of file library.bib
+ : @article{Dey2001
+ :                 ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1215 of file library.bib
+ : @article{Fernandes2008
+ :                       ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1237 of file library.bib
+ : @article{Chandy2011
+ :                    ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1249 of file library.bib
+ : @article{Eckert2009
+ :                    ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1350 of file library.bib
+ : @inproceedings{Cardellini2016
+ :                              ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1642 of file library.bib
+ : @article{Cugola2012
+ :                    ,
+I'm skipping whatever remains of this entry
+Warning--there's a number but no volume in Chandy2011
+Warning--empty journal in Fernandes2008
+Warning--there's a number but no volume in Fernandes2008
+Warning--empty journal in Freudenreich2015
+Warning--empty journal in Pandit2004
+Warning--there's a number but no volume in Pandit2004
+(There were 9 error messages)
